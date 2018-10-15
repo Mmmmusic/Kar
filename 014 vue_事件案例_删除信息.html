@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+  
+    ul{
+      margin: 0;
+      padding: 0;
+    }
+    ul li{
+      list-style: none;
+    }
+    li{
+      width: 100px;
+      overflow: hidden;
+      margin: 4px;
+      padding: 10px;
+      border: 1px #333333 solid;
+    }
+    button{
+      float: right;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <ul>
+      <li v-for="(info,index) in arr">
+        {{info}}
+        <button @click="rm(index)">删除</button>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+
+    var app = new Vue({
+      el:"#app",
+      data:{
+        arr:[1,2,3,4,5,6,7]
+      },
+      methods:{
+        rm(index){
+          console.log(index);
+          this.arr.splice(index,1);
+        }
+      }
+    })
+    
+  </script>
+
+</body>
+</html>

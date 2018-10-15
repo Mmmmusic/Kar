@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    ul li{
+      list-style: none;
+    }
+    .list{
+      padding: 10px;
+    }
+    input{
+      padding: 4px;
+      margin-bottom: 10px;
+    }
+    button{
+      padding: 5px 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    
+    <div class="list">
+      <input type="text" v-model="msg">
+      <ul>
+        <li v-for="item in arr">{{item.type}}:{{item.answer}}</li>
+      </ul>
+      <button @click="add">增加</button>
+      <button @click="rm">删除</button>
+    </div>
+
+  </div>
+
+  <script>
+
+    var app = new Vue({
+
+      el:"#app",
+      data:{
+       str:"ABCDEFGHIJKL",
+       arr:[],
+       msg:""
+      },
+      methods:{
+        add(){
+          this.arr.push({
+            type:this.str[this.arr.length],
+            answer:this.msg
+          });
+        },
+        rm(){
+          this.arr.pop();
+        }
+      }
+     
+    });
+
+  </script>
+
+</body>
+</html>

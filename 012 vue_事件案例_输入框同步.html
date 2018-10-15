@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+  
+    .con{
+      margin-top: 10px;
+      padding: 5px 10px;
+      width: 500px;
+      height: 100px;
+      line-height: 50px;
+      border:1px solid #e0244d;
+      overflow: auto;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <input type="text" @input="upd" v-bind:value="msg">
+    <div class="con">
+      <h1>{{msg}}</h1>
+    </div>
+  </div>
+
+  <script>
+
+    var app = new Vue({
+      el:"#app",
+      data:{
+        msg:"请输入内容"
+      },
+      methods:{
+        upd:function(e){
+          // 指向input输入的值
+          this.msg = e.target.value;
+        }
+      }
+    });
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+    
+    a{
+      text-decoration: none;
+    }
+    a:hover{
+      color: #ff0000;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <h1>{{msg}}</h1>
+
+    <!-- 标签内部插值 -->
+    <!-- v-once 数据只渲染一次，后期不会更新 -->
+    <h1 v-once>{{msg}}</h1>
+
+    <!-- 标签内部插值，插入html片段 -->
+    <h1 v-html="i"></h1>
+
+    <!-- 属性插值 渲染指定属性的内容-->
+    <h3 v-bind:id="myid">hello</h3>
+    <a v-bind:href="baidu">百度</a>
+    
+  </div>
+
+  <script>
+  
+    var app = new Vue({
+      el:"#app",      // 指定根元素
+      data:{          // 实例数据
+        msg:"hello",
+        i:"<i>h</i> ello",
+        myid:"box",
+        baidu:"http://www.baidu.com"
+      }
+    })
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+
+    <h1>{{obj.name}}</h1>
+    <h1>{{obj.age}}</h1>
+    <h1>{{obj.sex}}</h1>
+    <h1>{{obj.desc}}</h1>
+    
+  </div>
+
+  <script>
+
+    var app = new Vue({
+
+      el:"#app",
+      data:{
+        obj:{
+          name:"abc"
+        }
+      },
+     
+    });
+    
+    // 新增内容
+    app.obj = Object.assign({},app.obj,{age:20});
+    
+    // 新增内容 2
+    app.obj = {
+      ...app.obj,
+      sex:0
+    }
+
+    // 新增内容 3
+    Vue.set(app.obj,"desc","adas");
+
+  </script>
+
+</body>
+</html>

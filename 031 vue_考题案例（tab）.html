@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    ul li{
+      list-style: none;
+    }
+    .list{
+      padding: 10px;
+    }
+    input{
+      padding: 4px;
+      margin: 10px 0;
+    }
+    button{
+      margin: 4px 0 4px 4px;
+      width: 70px;
+      height: 27px;
+      cursor: pointer;
+      vertical-align: middle;
+    }
+    .mask{
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0,0,0,.7);
+      z-index: 999;
+    }
+    .wrapper{
+      width: 600px;
+      height: 200px;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      margin-left: -300px;
+      background-color: #fff;
+      padding: 5px;
+      transition: all 1s;
+    }
+    .wrapperChange{
+      transform: scale(0);
+    }
+    .content{
+      width: 600px;
+      min-height: 500px;
+      position: absolute;
+      top: 200px;
+      bottom: 200px;
+      left: 50%;
+      margin-left: -300px;
+      background-color: #fff;
+      padding: 10px 16px;
+    }
+    textarea{
+      width: 580px;
+      height: 80px;
+      resize: none;
+      margin-top: 10px;
+      padding: 10px;
+    }
+    .ok{
+      width: 80px;
+      height: 30px;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      margin-left: -40px;
+    }
+    .add{
+      width: 400px;
+    }
+    .desc{
+      margin: 0 auto;
+      margin-bottom: 10px;
+    }
+    .fun{
+      width: 20%;
+      float: right;
+    }
+    .fun button{
+      width: 50px;
+      margin: 0 0 0 4px;
+      float: right;
+    }
+    .options ul{
+      max-height: 180px;
+      overflow: auto;
+    }
+    .options li{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      word-break: break-all;
+      padding: 4px;
+    }
+    .options .info{
+      width: 80%;
+    }
+    td{
+      text-align: center;
+      padding: 4px;
+      font-size: 14px;
+    }
+    .ans h4{
+      margin-right: 10px;
+      display: inline-block;
+    }
+    .ans h4:nth-child(2){
+      opacity: .2;
+    }
+    .ans-con{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform:translate(-50%,-50%);
+      width: 700px;
+      height: 300px;
+      background-color: #fff;
+      padding: 10px;
+      margin: 0 auto;
+      overflow: auto;
+      z-index: 2;
+    }
+    .ans-con table{
+      margin: 0 auto;
+      width: 400px;
+    }
+    .ans-con h3{
+      text-align: center;
+      margin: 20px;
+    }
+    .ans-con button{
+      display: block;
+      margin: 20px auto 0 auto;
+    }
+    .hid{
+      display: none;
+    }
+    .err{
+      color: #f00;
+    }
+    .wrap{
+      width: 800px;
+      padding: 20px;
+      margin: 50px auto;
+      border: 1px #dedede solid;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    
+    <div class="wrap">
+
+      <button @click="add">添加</button>
+
+      <!-- 添加题目 -->
+      <div class="mask" v-show="viewFlag">
+        <div class="content">
+
+          <div>
+            <h2>题目:</h2>
+            <textarea class="topic" v-model="title"></textarea>
+            <h3>选项:</h3>
+            <input type="text" v-model="option" class="add">
+
+            <button @click="add" v-text="msg"></button>
+            <button @click="cancel" v-show="!flag">取消</button>
+            
+            <div class="options">
+                <ul>
+                    <li v-for="(item,index) in answerList">
+                      <div class="info">{{str[index]}} : {{item}}</div>
+                        <div class="fun">
+                          <button @click="del(index)">删除</button>
+                          <button @click="upd(index)">修改</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3>正确答案:</h3>
+                <input type="text" v-model="result">
+            </div>
+    
+            <button @click="ok" class="ok">确认</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 渲染题目 -->
+      <ul class="list">
+        <li v-for="(item,index) in list" class="desc">
+          <h3>{{index+1}}. {{item.title}}</h3>
+          <ul>
+            <li v-for="(option,list) in item.options">
+              <input type="radio" :value="str[list]" v-model="userArr[index]">
+              {{str[list]}}:{{option}}
+            </li>
+          </ul>
+          <div class="ans">
+            <h4>您选的答案是:{{userArr[index]}}</h4>
+            <h4>{{item.result}}</h4>
+          </div>
+        </li>
+      </ul>
+
+      <button @click="submit">提交</button>
+
+      <!-- 考试结果 -->
+      <div :class="{mask:flag,hid:!flag}">
+        <div class="ans-con">
+            <table border="1" cellspacing="0" v-show="q">
+                <tr :class="{hid:!flag}">
+                  <td>错题序号</td>
+                  <td>正确答案</td>
+                  <td>您的答案</td>
+                </tr>
+                <tr v-for="(item,index) in err">
+                  <td>{{item.index}}</td>
+                  <td>{{item.res}}</td>
+                  <td><del class="err">{{item.ans}}</del></td>
+                </tr>
+            </table>
+            <h3>{{score}}</h3>
+            <button @click="absAns" v-show="flag">确认</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+
+    var app = new Vue({
+
+      el:"#app",
+      data:{
+       str:"ABCDEFGHIJKL", // 选项
+       // 单个题目数据
+       option:"",          // 选项
+       title:"",           // 题目标题
+       answerList:[],      // 选项集合
+       result:"",          // 正确答案
+
+       list:[              // 题目集合
+          {
+            title:"不属于js变量声明方式的是",
+            options:["var","let","const","public"],
+            result:"D",
+            id:1
+          },
+          {
+            title:"不属于js数组方法的是",
+            options:["splice","replace","push","indexOf"],
+            result:"B",
+            id:2
+          },
+          {
+            title:"不属于js变量声明方式的是",
+            options:["var","let","const","public"],
+            result:"D",
+            id:3
+          },
+          {
+            title:"不属于js数组方法的是",
+            options:["splice","replace","push","indexOf"],
+            result:"B",
+            id:4
+          }
+       ],
+
+       userArr:[],
+       viewFlag:false,
+       flag:false,
+       score:"",
+       msg:"添加选项",
+       err:[],
+       q:true
+      },
+      methods:{
+        add(){
+          if(this.msg == "确认"){
+            this.answerList[this.x]=this.option;
+            this.option = "";
+            this.msg = "添加选项";
+            this.flag = false;
+          }else{
+            this.viewFlag = true;
+            this.answerList.push(this.option);
+            this.option = "";
+          }
+        },
+        ok(){
+          this.list.push({
+            title:this.title,
+            options:this.answerList,
+            result:this.result.toUpperCase(),
+            id:this.list.length+1
+          })
+          this.viewFlag = false;
+          console.log(this.list);
+          alert("添加成功");
+        },
+        upd(index){
+          this.x = index;
+          this.msg = "确认";
+          this.option = this.answerList[index];
+          this.flag = false;
+          // console.log(index,this.answerList[index]);
+        },
+        del(index){
+          this.flag = false;
+          this.answerList.splice(index,1);
+        },
+        submit(){
+          this.flag = true;
+          var count = 0;
+          for(var i = 0;i < this.list.length;i++){
+            if(this.list[i].result == this.userArr[i]){
+              count++;
+            }
+            if(this.list[i].result!==this.userArr[i]){
+              this.err.push({
+                index:this.list[i].id,
+                res:this.list[i].result,
+                ans:this.userArr[i],
+              });
+            }
+          }
+          if(this.err.length == 0){
+            this.q = false;
+          }
+
+          this.score=`一共${this.list.length}道题,您做对了${count}道,正确率${parseInt(count/this.list.length*100)}%`;
+
+        },
+        cancel(){
+          this.option = "";
+          this.msg = "添加选项";
+          this.flag = true;
+        },
+        absAns(){
+          this.flag = false;
+          this.err = [];
+        }
+      }
+     
+    });
+
+  </script>
+
+</body>
+</html>

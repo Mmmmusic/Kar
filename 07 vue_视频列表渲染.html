@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <script src="js/data.js"></script>
+  <title>Document</title>
+  <style>
+    
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    a{
+        text-decoration: none;
+    }
+    ul li{
+        list-style: none;
+    }
+    #movie{
+        width: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    #movie h3{
+        margin: 5px;
+    }
+    #movie h6{
+        text-overflow:ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    #movie a{
+        font-size: 14px;
+        color: #333439;
+    }
+    #movie a:hover{
+        color: #f00;
+    }
+    #movie li{
+        width: 140px;
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid #333;
+        text-align: center;
+        box-sizing: border-box;
+        float: left;
+    }
+    .img{
+        overflow: hidden;
+        width: 110px;
+        height: 70px;
+        display: block;
+        margin: 4px auto;
+    }
+    .img img{
+        width: 110px;
+        height: 70px;
+        background-color: #333439;
+        transition: all .4s;
+        cursor: pointer;
+    }
+    .img img:hover{
+        transform: scale(0.8);
+    }
+    @media (max-width:768px){
+        #movie{
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+
+    <ul id="movie">
+        <h3>{{tit.ps}}</h3>
+        <li v-for="item in list">
+            <div class="img"><img v-bind:src="item.vpic" alt=""></div>
+            <h5>{{item.shortTitle}}</h5>
+            <h6>{{item.vt}}</h6>
+            <a v-bind:href="item.vurl">点击观看</a>
+        </li>
+    </ul>
+    
+  </div>
+
+  <script>
+    
+    var app = new Vue({
+      el:"#app",      // 指定根元素
+      data:{          // 实例数据
+        list:data.data.vlist,
+        tit:data.data
+      }
+    })
+
+  </script>
+
+</body>
+</html>

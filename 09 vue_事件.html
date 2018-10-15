@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <button v-on:click="cl(1)">按钮</button>
+    <h6>{{num}}</h6>
+    <h5>{{num+10}}</h5>
+    <h4>{{num+20}}</h4>
+    <h3>{{num+30}}</h3>
+    <h2>{{num+40}}</h2>
+    <h1>{{num+50}}</h1>
+  </div>
+
+  <script>
+    
+    var app = new Vue({
+      el:"#app",      // 指定根元素
+      data:{          // 实例数据
+        num:0
+      },              // data内部数据变化,视图跟着变化
+      methods:{
+        cl:function(a){
+          console.log(a);
+          this.num++
+        }
+      }
+    })
+    
+    // methods内部方法this指向vue根实例
+  </script>
+
+</body>
+</html>

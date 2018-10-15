@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+  
+    button{
+      width: 50px;
+      height: 20px;
+      margin-right: 10px;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- 遍历标题 -->
+    <button v-for="(item,index) in list" @click="num=index">{{item.title}}</button>
+
+    <!-- 自定义tab内容 -->
+    <h1 v-show="0==num">one</h1>
+    <h1 v-show="1==num">two</h1>
+    <h1 v-show="2==num">three</h1>
+
+  </div>
+
+  <script>
+
+    var app = new Vue({
+
+      el:"#app",
+      data:{
+        list:[
+          {
+            title:1,
+          },
+          {
+            title:2,
+          },
+          {
+            title:3,
+          }
+        ],
+        num:0
+      },
+
+    });
+
+  </script>
+
+</body>
+</html>

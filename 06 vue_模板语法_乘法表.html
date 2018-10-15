@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+    
+    table{
+      border-collapse: collapse;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+
+    <table border="1" cellpadding="20">
+      <tr v-for="x in 9">
+        <td v-for="y in 9" v-if="x>=y">{{y}}*{{x}}={{x*y}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    
+    var app = new Vue({
+      el:"#app",      // 指定根元素
+      data:{          // 实例数据
+        
+      }
+    })
+
+  </script>
+
+</body>
+</html>

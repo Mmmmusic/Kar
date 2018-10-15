@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+  
+    #box{
+      width: 100px;
+      height: 100px;
+      background-color: #dfdfdf;
+      margin-bottom: 10px;
+    }
+    #setColor{
+      margin-top: 10px;
+    }
+    button{
+      margin-right: 10px;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <!-- js模拟 -->
+  <!-- <div id="box"></div> -->
+
+  <!-- 存颜色 -->
+  <!-- <div id="btn">
+    <button id="red">red</button>
+    <button id="green">green</button>
+    <button id="blue">blue</button>    
+  </div>
+
+  <button id="setColor">设置颜色</button> -->
+
+  <!-- ----------------------------------------------------------------- -->
+  
+  <div id="app">
+
+    <div id="box" :style="{backgroundColor:col}"></div>
+
+    <!-- 存颜色 -->
+    <button v-for="(item,index) in color" @click="saveColor(item)">{{item}}</button>
+
+    <button @click="setColor">设置颜色</button>
+
+  </div>
+
+  <script>
+
+    // js模拟
+    // ;(function(){
+    //   var c;
+    //   for(var i = 0;i < btn.children.length;i++){
+    //     btn.children[i].onclick = function(){
+    //       c = this.id;
+    //       console.log(c);
+    //     }
+    //   }
+
+    //   setColor.onclick = function(){
+    //     box.style.backgroundColor = c;
+    //   }
+    // })();
+
+    // vue实现
+    var app = new Vue({
+
+      el:"#app",
+      data:{
+        color:["red","green","blue"],
+        c:"",
+        col:"#dfdfdf"
+      },
+      methods:{
+        saveColor(color){
+          this.c = color;
+          console.log(this.c);
+        },
+        setColor(){
+          this.col = this.c;
+          console.log(this.col);
+        }
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>

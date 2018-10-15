@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+  
+    ul{
+      margin: 0;
+      padding: 0;
+    }
+    ul li{
+      list-style: none;
+    }
+    button{
+      cursor: pointer;
+    }
+    #app{
+      max-width: 350px;
+      overflow: hidden;
+    }
+    .con-list>button,.con-list>h4{
+      display: inline-block;
+    }
+    .list{
+      margin-top: 10px;
+      padding: 6px;
+      border: 1px solid #333;
+    }
+    .list h5{
+      display: inline-block;
+    }
+    .list>button{
+      float: right;
+      margin-top: 20px;
+      margin-right: 4px;
+    }
+    .box{
+      width: 200px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      background-color: rgba(0,0,0,.4);
+      z-index: 999;
+    }
+    .box input{
+      display: block;
+      height: 20px;
+      padding: 4px;
+      margin: 0 auto;
+      margin-bottom: 10px;
+      border: none;
+    }
+    .box input:first-child{
+      margin-top: 10px;
+    }
+    .box button{
+      float: right;
+      margin: 0 12px 10px 0;
+    }
+    .mask{
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0,0,0,.2);
+      z-index: 2;
+    }
+    .hid{
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    
+    <ul v-for="(item,index) in tit" class="con-list">
+      <h4>{{item.name}}</h4>
+      <button @click="addCon(index)">添加新菜</button>
+      <li>
+        <ul>
+          <li v-for="(item,del) in item.food" class="list">
+            <h5>{{item.name}}</h5>
+            <h5>{{item.price + "元"}}</h5>
+            <button @click="updList(index,del)">修改</button>
+            <button @click="rm(index,del)">删除</button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <div v-bind:class="{box:open,hid:down}" v-for="(item,index) in tit">
+      <input type="text" placeholder="请输入菜名" @input="upd" v-bind:value="foot">
+      <input type="text" placeholder="请输入价格" @input="upd1" v-bind:value="price">
+      <button @click="add()">确认</button>
+      <button @click="shutdown()">取消</button>
+    </div>
+
+    <div v-bind:class="{hid:down,mask:open}"></div>
+
+  </div>
+
+  <script>
+
+    var menu = [
+
+      {"type_id":1,"name":"大菜","food":[
+
+        {"food_id":1,"name":"鱼香肉丝","price":"10"},
+        {"food_id":2,"name":"红烧肉","price":"11"},
+        {"food_id":3,"name":"香辣粉","price":"12"},
+
+      ]},
+
+      {"type_id":2,"name":"中菜","food":[
+
+        {"food_id":4,"name":"小炒肉","price":"13"},
+        {"food_id":5,"name":"云吞","price":"14"}
+
+      ]}, 
+
+      {"type_id":3,"name":"小菜","food":[
+
+        {"food_id":6,"name":"雪糕","price":"15"},
+        {"food_id":7,"name":"黄瓜","price":"16"}
+
+      ]},
+
+    ];
+
+    var app = new Vue({
+      el:"#app",
+      data:{
+        tit:menu,
+        open:true,
+        down:true,
+        foot:"",
+        price:"",
+        x:0,
+        y:"",
+        z:0
+      },
+      methods:{
+        rm(index,del){
+          console.log(index,del);
+          this.tit[index].food.splice(del,1);
+        },
+        addCon(index){
+          this.down=false;
+          console.log(index);
+          this.x = index;
+        },
+        upd(e){
+          this.foot = e.target.value;
+        },
+        upd1(e){
+          this.price = e.target.value;
+        },
+        add(index){
+          if(this.foot == "" || this.price == ""){
+            return false;
+          }
+          console.log(this.x);
+          if(this.y == "ok"){
+            if(this.foot != "" && this.price != ""){
+              this.tit[this.x].food[this.z].name = this.foot;
+              this.tit[this.x].food[this.z].price = this.price;
+              this.y = "";
+              this.down = true;
+              this.foot = "";
+              this.price = "";
+            }
+          }else{
+            this.tit[this.x].food.push({name:this.foot,price:this.price});
+            this.down = true;
+            this.foot = "";
+            this.price = "";
+          }
+        },
+        shutdown(){
+          this.down = true;
+          this.foot = "";
+          this.price = "";
+        },
+        updList(index,del){
+          this.down = false;
+          this.y = "ok";
+          this.z = del;
+        }
+      }
+    });
+    
+  </script>
+
+</body>
+</html>

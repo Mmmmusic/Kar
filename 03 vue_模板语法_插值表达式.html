@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+    
+    ul,li{
+      list-style: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <ul>
+      <!-- 可用的插值表达式
+              加减乘除
+              三元表达式
+              方法调用
+      -->
+      <li>苹果 <i>{{price + 5}}</i></li>
+      <li>苹果 <i>{{"$" + price}}</i></li>
+      <li>苹果 <i>{{price > 5 ? 7 : 10}}</i></li>
+    </ul>
+    <!-- 属性也可以用插值表达式 -->
+    <h1 v-bind:id="price < 5 ? 5: 12">hello</h1>
+  </div>
+
+  <script>
+  
+    var app = new Vue({
+      el:"#app",      // 指定根元素
+      data:{          // 实例数据
+        price:10
+      }
+    })
+
+  </script>
+
+</body>
+</html>

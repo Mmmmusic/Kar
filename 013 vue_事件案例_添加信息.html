@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+  
+    ul li{
+      list-style: none;
+    }
+    li{
+      width: 100px;
+      overflow: hidden;
+      margin: 4px;
+      padding: 10px;
+      border: 1px #333333 solid;
+    }
+    button{
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <input type="text" @input="upd" v-bind:value="msg">
+    <button @click="add">添加</button>
+    <ul>
+      <li v-for="info in arr">{{info}}</li>
+    </ul>
+  </div>
+
+  <script>
+
+    var app = new Vue({
+      el:"#app",
+      data:{
+        msg:"请输入内容",
+        arr:[1,2]
+      },
+      methods:{
+        upd:function(e){
+          // 指向input输入的值
+          this.msg = e.target.value;
+        },
+        add(){
+          if(this.msg == ""){
+            return false;
+          }
+          this.arr.push(this.msg);
+          this.msg = "";
+        }
+      }
+    });
+
+  </script>
+
+</body>
+</html>

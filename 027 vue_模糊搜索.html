@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <script src="js/userinfo.js"></script>
+  <title>Document</title>
+  <style>
+
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    ul li{
+      list-style: none;
+    }
+    .info{
+      width: 540px;
+      margin: 10px 0 0 10px;
+      padding: 4px;
+    }
+    .list{
+      width: 550px;
+      border: 1px #cbcbcb solid;
+      border-top: 0;
+      margin-left: 10px;
+    }
+    .list li{
+      padding: 6px 0 6px 10px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .list li:hover{
+      background-color: #efefef;
+    }
+    .hid{
+      display: none;
+    }
+    .box{
+      font-size: 0;
+      position: relative;
+    }
+    .box button{
+      position: absolute;
+      top: 10px;
+      width: 80px;
+      height: 27px;
+      color: #fff;
+      background-color: #3385ff;
+      line-height: 27px;
+      text-align: center;
+      font-size: 14px;
+      outline: none;
+      display: inline-block;
+      cursor: pointer;
+      border: 1px #3385ff solid;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+
+    <div class="box">
+      <input type="text" v-model="info" placeholder="请输入省市信息" class="info" @input="ipt">
+      <button>搜索</button>
+    </div>
+    <ul v-bind:class="{list:flag,hid:toggle}" v-show="flag">
+      <li v-for="(info,index) in search" @click="desc(index)" >{{info.addr}}</li>
+    </ul>
+
+  </div>
+
+  <script>
+
+    var app = new Vue({
+
+      el:"#app",
+      data:{
+        info:"",
+        msg:json,
+        flag:true,
+        toggle:true
+      },
+      methods:{
+        desc(index){
+          this.flag = false;
+          this.info = this.search[index].addr;
+        },
+        ipt(){
+          this.flag = true;
+          this.toggle = false;
+          if(this.info == ""){
+            this.toggle = true;
+          }
+        }
+      },
+      computed:{
+        search(){
+          if(this.info){
+            return this.msg.filter((msg)=>{
+              return msg.addr.includes(this.info);
+            });
+          }
+        }
+      }
+     
+    });
+
+  </script>
+
+</body>
+</html>

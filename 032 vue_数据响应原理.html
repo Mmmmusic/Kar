@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <h1 id="txt">hi</h1>
+  </div>
+
+  <script>
+
+    var obj={
+      _str:"hello"
+    };
+    Object.defineProperty(obj,"str",{
+        get:function(){
+          console.log("你获取了str的值")
+          return this._str;
+        },
+        set:function(newVal){
+          console.log("你修改了str")
+          txt.innerHTML=newVal;
+          this._str=newVal;
+        }
+    });
+
+  </script>
+
+</body>
+</html>

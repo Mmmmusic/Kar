@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+  
+    button{
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+    .bannerlist{
+      width: 500px;
+      height: 200px;
+      background-color: #333439;
+      line-height: 200px;
+      text-align: center;
+      color: #ffffff;
+      font-size: 30px;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div id="app">
+
+    <div class="banner">
+      <div class="bannerlist" v-for="x in 3" v-show="x==num">{{x}}</div>
+    </div>
+    <!-- 标题 -->
+    <button @click="prev">上一张</button>
+    <button @click="next">下一张</button>
+
+  </div>
+
+  <script>
+
+    var app = new Vue({
+
+      el:"#app",
+      data:{
+        num:1
+      },
+      methods:{
+        next(){
+          this.num++;
+          if(this.num > 3){
+            this.num = 1;
+          }
+        },
+        prev(){
+          this.num--;
+          if(this.num < 1){
+            this.num = 3;
+          }
+        },
+      }
+    });
+
+  </script>
+
+</body>
+</html>

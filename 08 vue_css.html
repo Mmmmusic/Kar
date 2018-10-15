@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+    
+    .red{
+      color: #ff0000;
+    }
+    .blue{
+      color: #0000ff;
+    }
+    .size{
+      font-size: 30px;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- css -->
+    <div v-bind:class="{blue:flag,size:flag}">{{msg}}</div>
+
+    <!-- css数组写法 -->
+    <div v-bind:class="[c,fs]">{{msg}}</div>
+
+    <!-- style -->
+    <div v-bind:style="{color:c}">{{msg}}</div>
+
+  </div>
+
+  <script>
+    
+    var app = new Vue({
+      el:"#app",
+      data:{
+        c:"red",
+        fs:"size",
+        msg:"hello",
+        flag:true
+      }
+    })
+
+  </script>
+
+</body>
+</html>
