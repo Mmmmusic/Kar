@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+
+    <ol>
+      <li v-for="item in msg">{{item.shortTitle}}</li>
+    </ol>
+    
+  </div>
+
+  <script>
+
+    // vue 生命周期
+    // 不同的阶段做不同的事
+    
+    var app = new Vue({
+
+      el:"#app",
+      data:{
+        msg:[],
+      },
+      created(){
+        this.getData();
+      },
+      methods:{
+        getData(){
+          console.log("开始请求数据");
+          var node = document.createElement("script");
+          node.src="http://cache.video.iqiyi.com/jp/avlist/202861101/1/?callback=fun";
+          window.fun =(data)=>{
+            this.msg = data.data.vlist;
+            console.log("数据请求成功");
+            document.body.removeChild(node); // 请求成功后删除标签
+          }
+          document.body.appendChild(node);
+
+        }
+      }
+
+    });
+    
+
+  </script>
+
+</body>
+</html>

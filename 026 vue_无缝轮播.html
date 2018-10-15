@@ -112,7 +112,7 @@
         <div class="bannerlist" v-for="x in imgUrl"><img :src="x" alt=""></div>
       </div>
       <ul class="tab">
-        <li v-for="(item,index) in imgUrl.length-2" :class="index == num - 1?'active':''" @click="tab(index)">{{item}}</li>
+        <li v-for="(item,index) in imgUrl.length-2" :class="index == x ?'active':''" @click="tab(index)">{{item}}</li>
       </ul>
       <!-- 按钮 -->
       <button @click="prev" class="next">&lt;</button>
@@ -137,10 +137,15 @@
       },
       methods:{
         next(){
+          if(this.num == this.imgUrl.length - 2){
+            this.transition = "all 0s";
+            this.x = -1;
+          }
           if(this.flag){
             this.flag = false;
             this.transition = "all .6s";
             this.num++;
+            this.x++;
           }
           console.log(this.num);
         },
@@ -148,26 +153,32 @@
           if(this.num == this.imgUrl.length-1){
             this.transition = "all 0s";
             this.num = 1;
+            this.x = 0;
           };
           if(this.num < 1){
-              this.transition = "all 0s";
-              this.num = this.imgUrl.length-2;
-            }
+            this.transition = "all 0s";
+            this.num = this.imgUrl.length-2;
+          }
           this.flag = true;
         },
         prev(){
+          if(this.num == 1){
+            this.transition = "all 0s";
+            this.x = this.imgUrl.length - 2;
+          }
           if(this.flag){
-            console.log(this.num);
+            // console.log(this.num);
             this.flag = false;
             this.num--;
+            this.x--;
             this.transition = "all .6s";
           }
         },
         tab(index){
           if(this.flag){
             this.num = index+1;
-            this.nextEnd();
-            console.log(index);
+            this.x = index;
+            // console.log(index);
           }
         }
       }

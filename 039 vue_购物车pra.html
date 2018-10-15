@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <style>
+    
+    table{
+      border-collapse: collapse;
+    }
+    th,td{
+      border: 1px #dfdfdf solid;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+    input,button{
+      cursor: pointer;
+    }
+    .check{
+      text-align: center;
+    }
+    .hid{
+      display: none;
+    }
+    .show{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,.4);
+    }
+    .list{
+      position: absolute;
+      width: 600px;
+      padding: 20px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      background-color: #fff;
+    }
+    .list button{
+      position: absolute;
+      right: 30px;
+      bottom: 20px;
+    }
+    .all{
+      padding: 4px;
+    }
+    .black{
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <div id="app">
+
+    <table>
+      <thead>
+        <tr>
+          <th>选择</th>
+          <th>名称</th>
+          <th>价格</th>
+          <th>数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item,index) in list">
+          <td class="check">
+            <!-- 把数据绑定到空数组中 双向绑定-->
+            <input type="checkbox" v-model="shopCar" :value="item">
+          </td>
+          <td>{{item.title}}</td>
+          <td>{{item.price + "元"}}</td>
+          <td>
+            <button @click="reduce(item)">-</button>
+            <button>{{item.count}}</button>
+            <button @click="add(item)">+</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="all">
+      <input type="checkbox" v-model="checkAll">全选
+    </div>
+    <h2>总价：{{total}} 元</h2>
+
+    <button @click="show">订单详情</button>
+
+    <div :class="{hid:flag}">
+      <div class="show">
+        <div class="list">
+          <div class="info" v-for="(item) in shopCar">
+            <p>您购买了 <span class="black">{{item.count}}</span> 个{{item.title}},花费 <span class="black">{{item.price*item.count}}</span> 元</p>
+          </div>
+          <h4>合计：{{total}} 元</h4>
+          <button @click="cancel">确认</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+  
+    var app = new Vue({
+      el:"#app",        // 挂载点
+      data:{
+        list:[{
+          title:"苹果",
+          price:1.5,
+          count:1,
+          id:1
+        },
+        {
+          title:"香蕉",
+          price:1.5,
+          count:1,
+          id:1
+        },
+        {
+          title:"西瓜",
+          price:1.5,
+          count:1,
+          id:1
+        }],
+        shopCar:[],
+        desc:"",
+        flag:true
+      },
+      methods:{
+        add(item){
+          item.count++;
+        },
+        reduce(item){
+          item.count>1?item.count--:null;
+        },
+        show(){
+          if(this.desc == "ok" || this.shopCar.length != 0){
+            this.flag = false;
+            return this.shopCar;
+          }else{
+            this.flag = true;
+            alert("未选择任何商品");
+          }
+        },
+        cancel(){
+          this.flag = true;
+        }
+      },
+      computed:{
+        total(){  // 计算总价
+          var num = 0;
+          this.shopCar.forEach(function(val){
+            num+=val.price*val.count;
+          });
+          return num;
+        },
+        checkAll:{  // 是否全选
+          get(){    // 获取值
+            return this.shopCar.length == this.list.length;
+          },
+          set(newVal){  // 设置值
+            // 当获取到全选按钮发生改变时
+            if(newVal){
+              this.desc = "ok",
+              this.shopCar = this.list;
+            }else{
+              this.shopCar = [];
+              this.flag = true;
+              this.desc = "";
+            }
+          }
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>
