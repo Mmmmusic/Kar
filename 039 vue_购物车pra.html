@@ -113,19 +113,19 @@
       data:{
         list:[{
           title:"苹果",
-          price:1.5,
+          price:3,
           count:1,
           id:1
         },
         {
           title:"香蕉",
-          price:1.5,
+          price:2,
           count:1,
           id:1
         },
         {
           title:"西瓜",
-          price:1.5,
+          price:1.2,
           count:1,
           id:1
         }],
@@ -157,6 +157,7 @@
         total(){  // 计算总价
           var num = 0;
           this.shopCar.forEach(function(val){
+            // console.log(val);
             num+=val.price*val.count;
           });
           return num;

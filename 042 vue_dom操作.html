@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+  
+    #box{
+      width: 300px;
+      height: 300px;
+      line-height: 300px;
+      text-align: center;
+      color: #ffffff;
+      font-size: 50px;
+      background-color: #333439;
+      transition: all 2s;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+
+    <div id="box" @mouseover="move">{{msg}}</div>
+
+  </div>
+
+  <script>
+
+    // methods 和 mounted 阶段可以操作 dom
+    
+    var app = new Vue({
+
+      el:"#app",
+      data:{
+        msg:"hi"
+      },
+      methods:{
+        move(){
+          this.msg = "hello";
+          // var box = document.getElementById("box");
+          // box.style.backgroundColor = "#e0244d";
+          // console.log(box.innerHTML);
+
+          Vue.nextTick(function(){//DOM更新之后的回调函数
+            var box=document.getElementById('box');
+            console.log(box.innerHTML);
+          });
+
+          // 另一只写法
+          this.$nextTick(function(){
+            var box=document.getElementById('box');
+            console.log(box.innerHTML)
+          });
+        }
+      },
+
+
+    });
+
+  </script>
+
+</body>
+</html>

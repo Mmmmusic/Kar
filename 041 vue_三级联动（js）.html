@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/area.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  
+  <!-- 省 -->
+  <select name="" id="province"></select>
+
+  <!-- 市 -->
+  <select name="" id="city"></select>
+
+  <!-- 区 -->
+  <select name="" id="area"></select>
+  
+  <script>
+  
+    var pro = document.getElementById("province");
+    var city = document.getElementById("city");
+    var area = document.getElementById("area");
+
+    // 遍历省
+    for(var x in areaObj){
+      var node = document.createElement("option");
+      node.innerHTML = x;
+      pro.appendChild(node);
+    }
+
+    var pro_con = "河南省";
+
+    // 遍历市
+    for(var x in areaObj[pro_con][0]){
+      var node = document.createElement("option");
+      node.innerHTML = x;
+      city.appendChild(node);
+    }
+
+    var city_con = "郑州市";
+    // 遍历区
+    for(var x in areaObj[pro_con][0][city_con][0]){
+      var node = document.createElement("option");
+      node.innerHTML = x;
+      area.appendChild(node);
+      console.log(area);
+    }
+
+    // 当市发生改变时
+    city.onchange = function(){
+      var city_sel = city[this.selectedIndex].innerHTML;
+      console.log(city_sel);
+      area.innerHTML = "";
+      var area_sel = areaObj[pro_con][0][city_sel][0];
+      for(var x in area_sel){
+        var node = document.createElement("option");
+        node.innerHTML = x;
+        area.appendChild(node);
+      }
+    }
+
+    // 当省发生改变时
+    pro.onchange = function(){
+      city.innerHTML = "";
+      area.innerHTML = "";
+      var pro_sel = pro[this.selectedIndex].innerHTML;
+      pro_con = pro_sel;
+      for(var x in areaObj[pro_con][0]){
+        var node = document.createElement("option");
+        node.innerHTML = x;
+        city.appendChild(node);
+      }
+      city_con = city[city.selectedIndex].innerHTML;
+      for(var x in areaObj[pro_con][0][city_con][0]){
+        var node = document.createElement("option");
+        node.innerHTML = x;
+        area.appendChild(node);
+      }
+    }
+
+
+  </script>
+</body>
+</html>

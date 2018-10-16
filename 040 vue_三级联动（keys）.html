@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <script src="js/area.js"></script>
+</head>
+<body>
+  
+  <div id="app">
+    
+    <button @click="search">查询</button>
+    <select v-model="pro">
+      <option v-for="(item,index) in list">{{index}}</option>
+    </select>
+    <select v-model="city">
+      <option v-for="(item,index) in list[pro][0]">{{index}}</option>
+    </select>
+    <select v-model="area">
+      <option v-for="item in list[pro][0][city]">
+        {{Object.keys(item)[0]}}
+      </option>
+    </select>
+    <h2>{{msg}}</h2>
+    
+  </div>
+
+  <script>
+
+    var app = new Vue({
+      el:"#app",        // 挂载点
+      data:{
+        list:area,
+        pro:"河南省",
+        city:"郑州市",
+        area:"中原区",
+        msg:""
+      },
+      methods:{
+        search(){
+          console.log(this.list);
+          console.log(this.pro + this.city + this.area);
+          this.msg = this.pro + this.city + this.area;
+        }
+      },
+      watch:{
+        pro(){
+          this.city=Object.keys(this.list[this.pro][0])[0];
+          this.area=Object.keys(this.list[this.pro][0][this.city][0])[0];
+          this.msg = this.pro + this.city + this.area;
+
+        },
+        city(){
+          this.area=Object.keys(this.list[this.pro][0][this.city][0])[0];
+          this.msg = this.pro + this.city + this.area;
+        },
+        area(){
+          this.msg = this.pro + this.city + this.area;
+        }
+      }
+    });
+
+  </script>
+
+</body>
+</html>

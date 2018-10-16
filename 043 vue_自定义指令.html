@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+
+    <h2 v-col="c">hi</h2>
+    <h2 v-col:bg="c">hi</h2>
+
+  </div>
+
+  <script>
+
+    // 自定义指令 Vue.directive
+    Vue.directive("col",{
+      inserted(el,binding){
+        console.log(el,binding);
+        el.onclick = function(){
+          this.style[binding.arg?"background":"color"]=binding.value?binding.value:"red";
+        }
+      }
+    })
+    
+    var app = new Vue({
+
+      el:"#app",
+      data:{
+        c:"red"
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
