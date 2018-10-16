@@ -12,7 +12,6 @@
   
   <div id="app">
     
-    <button @click="search">查询</button>
     <select v-model="pro">
       <option v-for="(item,index) in list">{{index}}</option>
     </select>
@@ -37,12 +36,13 @@
         pro:"河南省",
         city:"郑州市",
         area:"中原区",
+        street:0,
         msg:""
       },
       methods:{
         search(){
-          console.log(this.list);
-          console.log(this.pro + this.city + this.area);
+          // console.log(this.list);
+          // console.log(this.pro + this.city + this.area);
           this.msg = this.pro + this.city + this.area;
         }
       },
@@ -50,15 +50,14 @@
         pro(){
           this.city=Object.keys(this.list[this.pro][0])[0];
           this.area=Object.keys(this.list[this.pro][0][this.city][0])[0];
-          this.msg = this.pro + this.city + this.area;
-
+          this.search();
         },
         city(){
           this.area=Object.keys(this.list[this.pro][0][this.city][0])[0];
-          this.msg = this.pro + this.city + this.area;
+          this.search();
         },
         area(){
-          this.msg = this.pro + this.city + this.area;
+          this.search();
         }
       }
     });

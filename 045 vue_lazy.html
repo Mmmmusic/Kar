@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+  
+    img{
+      margin-top: 1000px;
+      width: 600px;
+      height: 300px;
+      display: block;
+    }
+  
+  </style>
+</head>
+<body>
+  
+  <div id="app">
+    <img v-lazy="'img/1.png'" alt="">
+    <img v-lazy="'img/2.jpg'" alt="">
+    <img v-lazy="'img/3.jpg'" alt="">
+    <img v-lazy="'img/4.jpg'" alt="">
+    <img v-lazy="'img/5.jpg'" alt="">
+  </div>
+  
+  <script>
+
+    // 自定义懒加载组件
+    Vue.directive("lazy",{
+      bind(el,binding){         // el 当前dom元素，bindng 属性
+        function lazyfn(){
+          // console.log(el.offsetTop,el.offsetParent,el.offsetLeft);
+          var op=el.offsetParent;
+          var ot=el.offsetTop;
+          var ol=el.offsetLeft;
+
+          while(op!=null){
+              ot+=op.offsetTop;
+              ol+=op.offsetLeft;
+              op=op.offsetParent;
+          }
+
+          if((document.documentElement.scrollTop+window.innerHeight>ot) || (document.body.scrollTop+window.innerHeight>ot)){
+            el.src = binding.value;   // 把真实的路径赋给当前dom元素的src
+            window.removeEventListener("scroll",lazyfn);
+          }
+          
+        }
+
+        window.addEventListener("scroll",lazyfn);
+      }
+    })
+
+    var app = new Vue({
+      el:"#app",
+      data:{
+      },
+      methods:{
+      }
+    });
+    
+  </script>
+  
+</body>
+</html>

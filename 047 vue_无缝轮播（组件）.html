@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+  
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    #app{
+      margin: 10px;
+    }
+    .view{
+      width: 625px;
+      height: 270px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      margin: 50px 0;
+    }
+    .bannerlist{
+      width: 625px;
+      height: 270px;
+      background-color: #333439;
+      line-height: 270px;
+      text-align: center;
+      color: #ffffff;
+      font-size: 30px;
+      float: left;
+      border-right: 1px #ff6700 solid;
+      box-sizing: border-box;
+    }
+    .bannerlist img{
+      display: block;
+      width: 625px;
+      height: 270px;
+      cursor: pointer;
+    }
+    .tab{
+      width: 200px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      display: flex;
+      justify-content: space-around;
+      box-sizing: border-box;
+    }
+    .tab li{
+      width: 25px;
+      height: 2px;
+      background-color: #fff;
+      float: left;
+      font-size: 0;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .active{
+      transition: all .3s;
+      background-color: #333439!important;
+    }
+    .next,.prev{
+      width: 50px;
+      height: 40px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background-color: rgba(0,0,0,.4);
+      color: #ffffff;
+      transition: all .6s;
+    }
+    .next{
+      left: 0;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      left: -100px;
+    }
+    .prev{
+      right: 0;
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+      right: -100px;
+    }
+    .next:hover{
+      background-color: rgba(0,0,0,.6);
+    }
+    .prev:hover{
+      background-color: rgba(0,0,0,.6);
+    }
+    .view:hover .next{
+      left: 0;
+    }
+    .view:hover .prev{
+      right: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <slide></slide>
+    <slide></slide>
+    <slide></slide>
+    <slide></slide>
+    <slide></slide>
+    <slide></slide>
+    <slide></slide>
+    <slide></slide>
+    <slide></slide>
+    <slide></slide>
+    <slide></slide>
+    <slide></slide>
+  </div>
+
+  <script>
+
+    Vue.component("slide",{
+      template:`
+      
+        <div class="view">
+
+          <div class="banner" :style="{width:625*imgUrl.length+'px',marginLeft:-625*num+'px',transition:transition}" @transitionend="nextEnd">
+            <div class="bannerlist" v-for="x in imgUrl"><img :src="x" alt=""></div>
+          </div>
+          <ul class="tab">
+            <li v-for="(item,index) in imgUrl.length-2" :class="index == x ?'active':''" @click="tab(index)">{{item}}</li>
+          </ul>
+          <!-- 按钮 -->
+          <button @click="prev" class="next">&lt;</button>
+          <button @click="next" class="prev">&gt;</button>
+
+        </div>
+      
+      `,
+      data(){
+        return{
+          num:1,
+          imgUrl:["img/6.jpg","img/1.png","img/2.jpg","img/3.jpg","img/4.jpg","img/5.jpg","img/6.jpg","img/1.png"],
+          transition:"all .6s",
+          flag:true,
+          animate:true,
+          x:0
+        }
+      },
+      methods:{
+        next(){
+          if(this.num == this.imgUrl.length - 2){
+            this.transition = "all 0s";
+            this.x = -1;
+          }
+          if(this.flag){
+            this.flag = false;
+            this.transition = "all .6s";
+            this.num++;
+            this.x++;
+          }
+          console.log(this.num);
+        },
+        nextEnd(){
+          if(this.num == this.imgUrl.length-1){
+            this.transition = "all 0s";
+            this.num = 1;
+            this.x = 0;
+          };
+          if(this.num < 1){
+            this.transition = "all 0s";
+            this.num = this.imgUrl.length-2;
+          }
+          this.flag = true;
+        },
+        prev(){
+          if(this.num == 1){
+            this.transition = "all 0s";
+            this.x = this.imgUrl.length - 2;
+          }
+          if(this.flag){
+            // console.log(this.num);
+            this.flag = false;
+            this.num--;
+            this.x--;
+            this.transition = "all .6s";
+          }
+        },
+        tab(index){
+          if(this.flag){
+            this.num = index+1;
+            this.x = index;
+            // console.log(index);
+          }
+        }
+      },
+
+    });
+
+    var app = new Vue({
+
+      el:"#app",
+
+    });
+
+  </script>
+
+</body>
+</html>

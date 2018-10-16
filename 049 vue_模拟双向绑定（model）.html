@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  
+  <div id="app">
+
+    <input type="text" :value="msg" @input="ipt" @keyup.kar="enter">
+    <h4>{{msg}}</h4>
+
+  </div>
+  
+  <script>
+
+    Vue.config.keyCodes.kar = 13;
+
+    var app = new Vue({
+      el:"#app",
+      data:{
+        msg:"hi"
+      },
+      methods:{
+        ipt(e){
+          this.msg=e.target.value;
+        },
+        enter(e){
+          this.msg=e.target.value;
+          alert(this.msg);
+        }
+      }
+    });
+    
+  </script>
+  
+</body>
+</html>

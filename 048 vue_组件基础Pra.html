@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  
+  <div id="app">
+    <info></info>
+
+  </div>
+  
+  <script>
+
+    Vue.component("info",{
+
+      template:`
+        <div>
+          <input type="text" v-model="msg">
+          <h1 @click="ad">{{msg}}</h1>
+        </div>
+      `,
+      data:function(){
+        return{
+          msg:"hi"
+        }
+      },
+      methods:{
+        ad(){
+          console.log("组件");
+        }
+      }
+    });
+
+    var app = new Vue({
+      el:"#app",
+    });
+    
+  </script>
+  
+</body>
+</html>

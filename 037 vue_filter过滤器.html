@@ -11,15 +11,31 @@
 
   <div id="app">
     <h1>{{msg|toUpper(1)}}</h1>
+    <!-- <h1>{{msg|toLower(1)}}</h1> -->
   </div>
 
   <script>
+    
+    // 全局定义过滤器 filter （全局定义不带s）
+    // Vue.filter("toUpper",function(val){
+    //   return val.toUpperCase();
+    // });
+    // Vue.filter("toLower",function(val){
+    //   return val.toLowerCase();
+    // });
     
     var app = new Vue({
 
       el:"#app",
       data:{
-        
+        msg:"hi"
+      },
+      // 实例内部定义过滤器 带 s
+      filters:{
+        toUpper:function(val,b){
+          console.log(b);
+          return val.toUpperCase();
+        }
       }
       
     })

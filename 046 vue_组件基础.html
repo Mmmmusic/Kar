@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  
+  <div id="app">
+    <ipt></ipt>
+    <!-- <ipt/> -->
+    <div is="ipt"></div>
+    <component is="ipt"></component>
+
+    <!-- 组件使用方式： 
+
+      01 双标签形式
+      02 单标签形式
+      03 依附于现有标签
+      04 内置容器标签
+
+    -->
+    
+  </div>
+  
+  <script>
+
+    Vue.component("ipt",{
+      // 模板必须要有唯一顶层元素
+      template:`
+        <div>
+          <input type="text" v-model="msg">
+          <h1>{{msg}}</h1>
+        </div>
+      `,
+      data(){
+        return {    // data是一个方法，返回一个对象
+          msg:"hi"
+        }
+      }
+    });
+
+    var app = new Vue({
+      el:"#app",
+    });
+    
+  </script>
+  
+</body>
+</html>
