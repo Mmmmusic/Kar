@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- vue 
+  
+    01 指令
+
+      v-text v-html // 改变元素内容
+      v-show        // 显示、隐藏
+      v-if v-else v-else-if // 判断语句
+      v-for         // 遍历
+      v-bind        // 动态绑定
+      v-on          // 事件处理
+      v-model       // 双向绑定
+      v-once        // 执行一次
+      v-clock       // ？？？
+      v-pre         // ？？？
+
+    02 配置
+
+      el: "#app"  // 挂载点，一个页面中尽量只存在一个
+      template:`` // 模板
+      data:{} 组件中 data(){return{}} // 数据发生改变，视图跟着变
+      components:{} // 组件
+      methods:{}  // 当前组件的所有事件
+      computed:{} // 计算属性，对当前数据进行处理并得到新的数据作为返回值
+      filters:{}  // 过滤器，对数据进行处理
+                  // {{值 | 过滤器 | 过滤器}}     
+      watch:{}  // 监听数据变化
+      props:[]  // 用来进行父子组件通信，父组件数据传递给子组件在子组件的props中添加相关的prop名字
+      props:{
+        prop名字:{
+          type:类型，
+          default:默认值，  // 默认值如果是对象或数组
+          default(){
+            return 对象 || 数组
+          },
+          validator(value){
+            自定义验证，传入的内容必须符合对应的要求
+          },
+          required: true 必填项
+        }
+      }
+    
+    03 生命周期
+
+      4个生命周期
+        01) 创建  create
+          beforeCreate
+          created
+        02) 挂载  mount
+          beforeMount
+          mounted
+        03) 更新  update
+          beforeUpdate
+          updated
+        04) 销毁  destory
+          beforeDestory
+          destoryed
+        
+      只要触发对应的操作，就会触发对应的钩子函数
+      最常用的钩子函数是 created（可以请求数据），mounted（可以操作dom）
+      beforeCreated 获取不到数据
+
+      钩子函数常用的有 8 个，一共有 11 个
+
+      04 组件注册
+
+        01) 全局注册
+          Vue.component("组件名",组件配置对象)
+        局部注册
+        02) components:{
+            组件名：组件配置对象
+          }
+
+      05 自定义事件
+          $on   // 监听对应的自定义事件
+          $emit // 触发自定义事件
+          $off  // 取消自定义事件的监听
+          
+          可以给一个自定义事件添加多个监听
+          $off("自定义事件")         // 会直接将多个监听都移除
+          $off("自定义事件",函数名)  // 只移除对应的监听 
+  -->
+
+</body>
+</html>
