@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- 把click当成自定义事件 不生效 -->
+    <btn @click="cl">自定义事件</btn>
+
+    <!-- 触发原生事件 -->
+    <btn @click.native="cl">触发原生事件</btn>
+    
+  </div>
+
+</body>
+
+<script>
+
+  Vue.component("btn",{
+    template:`
+      <button>hi</button>
+    `
+  });
+
+  var app = new Vue({
+    el: "#app",
+    data:{
+
+    },
+    methods:{
+      cl(){
+        console.log(123);
+      }
+    }
+  });
+
+</script>
+
+</html>

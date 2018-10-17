@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+  
+    ul li{
+      list-style: none;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <div id="app">
+
+    <!-- 用v-bind动态传值 -->
+    <info :msg="[1,2,4,53]"></info>
+    <info :msg="['a','d','re','wq']"></info>
+    <!-- 调用根实例的arr数组 -->
+    <info :msg="arr"></info>
+
+    <!-- 调用info模板 -->
+    <info1></info1>           
+    
+  </div>
+
+  <script>
+
+    Vue.component("info",{
+      props:["msg"],    // 类似于形参 静态props
+      template:`
+        <ul>
+          <li v-for="item in msg">{{item}}</li>
+        </ul>
+      `,
+    });
+
+    Vue.component("info1",{
+      data(){
+        return{
+          msg:["q","w","e"]
+        }
+      },
+      template:`
+        <info :msg="msg"></info>
+      `
+    })
+    
+    var app = new Vue({
+      el:"#app",
+      data:{
+        arr:[9,8,7]
+      }
+    });
+    
+  </script>
+  
+</body>
+</html>

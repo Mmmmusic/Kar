@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <style>
+  
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .sel{
+      margin: 20px 0 0 60px;
+      width: 300px;
+      overflow: hidden;
+    }
+    ul li{
+      list-style: none;
+    }
+    .sel ul,.sel p{
+      float: left;
+      color: #34485d;      
+    }
+    .sel p{
+      line-height: 30px;
+      margin-left: 40px;
+    }
+    li{
+      width: 100px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      background-color: #f5f5f5;
+      cursor: pointer;
+      transition: all .3s;
+    }
+    .active{
+      background-color: #3fb783;
+    }
+    .blue:hover{
+      background-color: #3fb783;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div id="app">
+
+    <div class="sel">
+      <ul>
+        <li @click="flag=!flag">{{msg}}</li>
+        <li v-for="(item,index) in arr" v-if="flag" @click="cl(index)" :class="index==x?'active':'blue'">{{item}}</li>
+      </ul>
+      <p>{{msg}}</p>
+    </div>
+
+  </div>
+
+</body>
+
+<script>
+
+  var app = new Vue({
+    el: "#app",
+    data:{
+      arr:[1,2,3,4,5],
+      msg:"",
+      flag:true,
+      x:0
+    },
+    created(){
+      this.msg = this.arr[0];
+      this.flag = false;
+    },
+    methods:{
+      cl(index){
+        this.x = index;
+        console.log(this.arr[index]);
+        this.msg=this.arr[this.x];
+        this.flag = false;
+      }
+    }
+  });
+
+</script>
+
+</html>

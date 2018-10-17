@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- <info :msg="msg" @upadte:msg="msg=arguments[0]"></info> -->
+    <info :msg.sync="msg"></info>
+
+  </div>
+
+</body>
+
+<script>
+
+  Vue.component("info",{
+    props:["msg"],
+    template:`
+      <button @click="cl">{{msg}}</button>
+    `,
+    methods:{
+      cl(){
+        this.$emit("update:msg",123);
+      }
+    }
+  });
+
+  var app = new Vue({
+    el: "#app",
+    data:{
+      msg:"hello"
+    }
+  });
+
+</script>
+
+</html>
