@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+
+  <div id="app">
+    <h1>{{msg}}</h1>
+    <!-- 属于根实例的作用域 -->
+    <!-- 监听事件 -->
+    <c1 @cha="change"></c1>   
+  </div>
+
+</body>
+
+<script>
+
+  Vue.component("c1",{
+    template:`
+      <button @click="cl">按钮</button>
+    `,
+    created(){
+      // 第一个参数是 自定义事件的名字，第二个是传递的参数
+      // this.$emit("cha",123);
+    },
+    methods:{
+      cl(){
+        // 触发事件
+        this.$emit("cha",123);
+      }
+    }
+  })
+  var app = new Vue({
+    el: "#app",
+    data:{
+      msg:"hello",
+    },
+    methods:{
+      change(a){
+        this.msg = a;
+      }
+    }
+  });
+
+</script>
+
+</html>

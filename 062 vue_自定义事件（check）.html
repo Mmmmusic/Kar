@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+
+  <div id="app">
+
+    <div>
+      <h3>父组件</h3>
+      <input type="checkbox" v-model="flag">
+
+      <!-- 用arguments[0]拿函数集合中的第一个参数 -->
+      <c1 :flag="flag" @cha="flag=arguments[0]"></c1>
+
+    </div>
+    
+  </div>
+
+</body>
+
+<script>
+
+  Vue.component("c1",{
+    // props 单向数据流
+    props:["flag"],
+    // 分解动作
+    template:`
+      <div>
+        <h3>子组件</h3>
+        <input type="checkbox" :checked="flag" @change="fn">
+      </div>
+    `,
+    // @change绑定fn方法，fn方法接收flag值，自定义事件里用arguments[0]取出fn方法里暴露出来的值
+    // checked 勾选对flag值没有任何影响
+    methods:{
+      // 只要触发事件 c1的自定义事件cha里的fn方法就会被执行
+      fn(e){
+        // 成为事件处理函数的第一个参数
+        // e.target.checked是第一个参数，把自定义事件名略过去
+        this.$emit("cha",e.target.checked);
+      }
+    }
+  });
+  
+  var app = new Vue({
+    el: "#app",
+    data:{
+      flag:true,
+    }
+  });
+
+</script>
+
+</html>

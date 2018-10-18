@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+
+  <div id="app">
+
+    <h1>info</h1>
+    <info :flag.sync="flag"></info>
+    <h1>info1</h1>
+    <info1 :flag.sync="flag"></info1>
+
+  </div>
+
+</body>
+
+<script>
+
+  Vue.component("info",{
+    props:["flag"],
+    template:`
+      <input type="checkbox" :checked="flag" @change="change"> 
+    `,
+    methods:{
+      change(e){
+        this.$emit("update:flag",e.target.checked); // $emit用于子到父传递数据
+      }
+    }
+  });
+
+  Vue.component("info1",{
+    props:["flag"],
+    template:`
+      <input type="checkbox" :checked="flag" @change="change"> 
+    `,
+    methods:{
+      change(e){
+        this.$emit("update:flag",e.target.checked); // $emit用于子到父传递数据
+      }
+    }
+  });
+
+  var app = new Vue({
+    el: "#app",
+    data:{
+      flag:true
+    }
+  });
+
+</script>
+
+</html>

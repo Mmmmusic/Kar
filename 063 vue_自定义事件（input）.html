@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+
+  <div id="app">
+
+    <div>
+      <h1>{{msg}}</h1>
+      <!-- 监听自定义的cha事件 -->
+      <c1 :msg="msg" @ipt="msg=arguments[0]"></c1>
+    </div>
+    
+  </div>
+
+</body>
+
+<script>
+
+  Vue.component("c1",{
+    props:["msg"],
+    // 把双向绑定动作分解，先拿到值
+    template:`
+      <input type="text" :value="msg" @input="ipt">
+    `,
+    methods:{
+      // 当输入框的值发生改变时触发 @input 中的 change1 方法，change方法中用自定义事件接收已改变过的值
+      ipt(e){
+        // console.log(e.target.value);
+        this.$emit("ipt",e.target.value);
+      }
+    }
+    
+  });
+  
+  var app = new Vue({
+    el: "#app",
+    data:{
+      msg:"hello"
+    }
+  });
+
+</script>
+
+</html>

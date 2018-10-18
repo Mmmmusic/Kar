@@ -43,7 +43,16 @@
     .blue:hover{
       background-color: #3fb783;
     }
-    
+    .icon{
+      display: inline-block;
+      font-size: 0;
+      width: 0;
+      height: 0;
+      border: 7px solid transparent;
+      border-top-color: #34485d;
+      vertical-align: -6px;
+      margin-left: 2px;
+    }
   </style>
 </head>
 <body>
@@ -69,7 +78,7 @@
     template:`
       <div class="sel">
         <ul>
-          <li @click="flag=!flag">{{msg}}</li>
+          <li @click="flag=!flag">{{msg}} <span class="icon"></span></li>
           <li v-for="(item,index) in arr" v-if="flag" @click="cl(index)" :class="index==x?'active':'blue'">{{item}}</li>
         </ul>
         <p>{{msg}}</p>
