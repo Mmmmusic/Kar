@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <script src="js/vue-router.js"></script>
+</head>
+<body>
+  
+  <div id="app">
+    <div>
+      <router-link to="/">index</router-link>
+      <router-link to="/list">list</router-link>
+    </div>
+  
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+    
+  </div>
+
+  <script>
+  
+    var index = {
+      template:`
+        <h1>hello</h1>
+      `
+    }
+
+    var list = {
+      template:`
+        <input type="text">
+      `
+    }
+
+    var app = new Vue({
+      el:"#app",
+      router:new VueRouter({
+        routes:[{
+          path:"/",
+          component:index
+        },{
+          path:"/list",
+          component:list
+        },]
+      })
+    })
+  
+  </script>
+</body>
+</html>

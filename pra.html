@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,17 +7,15 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <script src="js/vue.js"></script>
+  <script src="js/vue-router.js"></script>
 </head>
 <body>
 
   <div id="app">
 
-    <div>
-
-      <input type="text" v-model="msg" @keyup.veb="ky">
-      <h1>{{msg}}</h1>
-      
-    </div>
+    <router-link to="/">index</router-link>
+    <router-link to="/list">list</router-link>
+    <router-view></router-view>
     
   </div>
 
@@ -24,22 +23,15 @@
 
 <script>
 
-  Vue.config.keyCodes.veb = 13;
-  
+
   var app = new Vue({
     el: "#app",
     data:{
       msg:""
     },
-    methods:{
-      ky(e){
-        alert(this.msg);
-        this.msg = e.target.value;
-      }
-    }
-    
   });
 
+  
 </script>
 
 </html>

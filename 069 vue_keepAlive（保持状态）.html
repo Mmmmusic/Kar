@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <script src="js/vue-router.js"></script>
+  <style>
+  
+    .bor{
+      border: 1px #333 solid;
+    }
+  
+  </style>
+</head>
+<body>
+
+  <div id="app">
+
+    <button @click="c=c=='c1'?'c2':'c1'">切换</button>
+
+    <keep-alive>
+      <div :is="c"></div>
+    </keep-alive>
+
+  </div>
+
+</body>
+
+<script>
+
+  Vue.component("c1",{
+    template:`
+      <div>
+        <input type="text">
+      </div>
+    `,
+    created(){
+      console.log("c1");
+    }
+  });
+  Vue.component("c2",{
+    template:`
+      <div>
+        <h2 @click="cl">keep-alive</h2>
+      </div>
+    `,
+    created(){
+      console.log("c2");
+    },
+    methods:{
+      cl(e){
+        e.target.style.color = "red";
+      }
+    }
+  });
+
+
+  var app = new Vue({
+    el:"#app",
+    data:{
+      c:"c1"
+    },
+    methods:{
+      a(){
+        console.log(a);
+      }
+    }
+  })
+
+</script>
+
+</html>

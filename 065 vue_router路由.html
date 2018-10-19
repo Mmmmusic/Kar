@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <script src="js/vue-router.js"></script>
+  <style>
+  
+    a{
+      text-decoration: none;
+    }
+  
+  </style>
+</head>
+<body>
+
+
+  <!-- 单页面应用中，页面就像是一个容器
+
+  内容的切换，实际就是请求新的内容，并替换div#app中原有内容 -->
+
+  <div id="app">
+
+    <router-link to="/index">index</router-link>
+    <router-link to="/detail">detail</router-link>
+    <router-view></router-view>
+
+  </div>
+
+</body>
+
+<script>
+
+  var index = {
+    template:`
+      <h1>我是index组件</h1>
+    `
+  }
+  var detail = {
+    template:`
+      <h1>我是detail组件</h1>
+    `
+  }
+  
+  var app = new Vue({
+    el: "#app",
+    data:{
+
+    },
+    router:new VueRouter({
+      routes:[{
+        path:"/index",
+        component:index
+      },{
+        path:"/detail",
+        component:detail
+      }]
+    })
+  });
+
+</script>
+
+</html>

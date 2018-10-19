@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <script src="js/vue-router.js"></script>
+  <style>
+  
+    .bor{
+      border: 1px #333 solid;
+    }
+  
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <router-view class="bor"></router-view>
+  </div>
+
+</body>
+
+<script>
+
+  var list={
+    template:`
+      <ul>
+        <li v-for="item in list">
+          <h3>{{item.title}}</h3>
+          <p>{{item.sub}}</p>
+          <router-link :to="'/detail/'+item.title">查看详情</router-link>
+        </li>
+      </ul>
+    `,
+    data(){
+      return{
+        list:[
+          {
+            title:"苹果",
+            sub:"只需5毛钱,就能买一袋"
+          },
+          {
+            title:"西瓜",
+            sub:"吃了不拉肚子"
+          },
+          {
+            title:"番茄",
+            sub:"番茄炒鸡蛋,非常好看"
+          }
+        ]
+      }
+    },
+    created(){
+      console.log("进入列表页");
+    }
+  }
+
+  var detail={
+    template:`
+      <div>
+        <h1>{{$route.params.title}}</h1>
+        <h1>支付方式</h1>
+        <p>微信</p>
+        <p>支付宝</p>
+        <router-link to="/">回到列表页</router-link>
+      </div>
+    `,
+    created(){
+      console.log("进入详情页",this.$route);
+    }
+  }
+
+  var app = new Vue({
+    el:"#app",
+    router:new VueRouter({
+      routes:[{
+        path:"/",
+        component:list
+      },{
+        path:"/detail/:title",
+        component:detail
+      }]
+    })
+  })
+
+</script>
+
+</html>

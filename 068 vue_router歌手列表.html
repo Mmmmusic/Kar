@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <script src="js/vue-router.js"></script>
+  <style>
+  
+    ul li{
+      list-style: none;
+    }
+    img{
+      width: 80px;
+    }
+  
+  </style>
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- <router-link to="/">singer</router-link> -->
+    <!-- <router-link to="/songs">songs</router-link> -->
+    <router-view></router-view>
+
+  </div>
+
+  
+  <script>
+
+    // 歌手页
+    var singer = {
+      template:`
+        <div>
+          <h1>singer</h1>
+          <ul>
+            <li v-for="item in singerList">
+              <img :src="item.picUrl" alt="">
+              <span>{{item.name}}</span>
+              <router-link :to="'/songs?id='+item.id">查看单曲</router-link>
+            </li>
+          </ul>
+        </div>
+      `,
+      data(){
+        return{
+          singerList:[]
+        }
+      },
+      created(){
+        this.$ajax("http://musicapi.leanapp.cn/artist/list?cat=1001").then((res)=>{
+          this.singerList = JSON.parse(res).artists;
+          console.log(JSON.parse(res),"获取成功",this.singerList);
+        });
+      }
+    }
+    
+    // 歌曲列表
+    var songs = {
+      template:`
+        <div>
+          <h1>songs</h1>
+          <ul>
+            <li v-for="item in songList">
+              <img :src="item.al.picUrl" alt="">
+              <span>{{item.al.name}}</span>
+              <router-link :to="'/player?id='+item.id">播放</router-link>
+            </li>
+          </ul>
+        </div>
+      `,
+      data(){
+        return{
+          songList:[]
+        }
+      },
+      created(){
+        this.$ajax("http://musicapi.leanapp.cn/artists?id="+this.$route.query.id).then((res)=>{
+          this.songList = JSON.parse(res).hotSongs;
+          console.log(JSON.parse(res),"获取成功",this.songList);
+        });
+      }
+    }
+
+    // 播放页
+    var player = {
+      template:`
+        <div>
+          <audio controls :src="url"></audio>
+        </div>
+      `,
+      data(){
+        return{
+          url:""
+        }
+      },
+      created(){
+        this.$ajax("http://musicapi.leanapp.cn/music/url?id="+this.$route.query.id).then((res)=>{
+          this.url=JSON.parse(res).data[0].url;
+          console.log(JSON.parse(res),"获取成功");
+        });
+      }
+    }
+
+    // 封装ajax插件
+    Vue.prototype.$ajax = function(url){
+      return new Promise((resolve)=>{
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET",url);
+        xhr.send();
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState == 4 &&　xhr.status == 200){
+            resolve(xhr.responseText);
+            console.log("请求成功");
+          }
+        }
+      });
+    }
+
+    // 根实例
+    var app = new Vue({
+      el:"#app",
+      router:new VueRouter({
+        routes:[{
+          path:"/",
+          component:singer
+        },{
+          path:"/songs",
+          component:songs
+        },{
+          path:"/player",
+          component:player
+        }]
+      })
+    });
+
+  </script>
+
+</body>
+</html>
