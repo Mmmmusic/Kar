@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    
+  <script>
+
+  /*
+  
+    async await
+    声明函数时添加 async前缀
+    在async函数中可以用await调用异步函数
+   */
+  
+  function shaoshui(){
+    return new Promise(function (resolve,reject){
+      console.log('烧水')
+      // 异步成功执行resolve，失败执行reject
+      setTimeout(()=>{
+        if(Math.random()>0){
+          resolve('开水');
+        }else{
+          reject('没烧开');
+        }
+      },1500);
+      
+    });
+  }
+
+  // 支持promise调用
+  // shaoshui().then((data)=>{
+  //   console.log(data);
+  // }).catch((err)=>{
+  //   console.log(err);
+  // });
+
+  // async用try catch捕获异常
+  async function fn(){
+    try{
+      const result = await shaoshui();
+      console.log(result);
+      console.log(1);
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  fn();
+
+  </script>
+
+</body>
+</html>

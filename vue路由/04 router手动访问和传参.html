@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+</head>
+<body>
+  
+  <div id="app">
+
+    <div>
+      <router-link to="/">首页</router-link>
+      <router-link to="/about">关于我们</router-link>
+      <router-link to="/user/张三?age=10">张三</router-link>
+      <router-link to="/user/李四?age=11">李四</router-link>
+      <button @click="cl">跳页</button>
+    </div>
+    <div>
+      <router-view></router-view>
+    </div>
+  </div>
+
+  <script>
+
+    var routes = [
+      {
+        path:'/',
+        component:{
+          template:`
+            <div>
+              <h1>首页</h1>
+            </div>  
+          `
+        }
+      },
+      {
+        path:'/about',
+        component:{
+          template:`
+            <div>
+              <h1>关于我们</h1>
+            </div>  
+          `
+        }
+      },
+      {
+        path:'/user/:name',
+        name:'user',
+        component:{
+          template:`
+            <div>
+              <h1>我叫：{{$route.params.name}}</h1>
+              <h1>今年：{{$route.query.age}}岁</h1>
+              <router-link to="more" append>更多信息</router-link>
+              <router-view></router-view>
+            </div>  
+          ` 
+        },
+        children:[{ // 子路由
+          path:'more',
+          component:{
+            template:`
+              <div>
+                <h1>{{$route.params.name}}的详细信息</h1>
+                <h1>随便写些东西 随便写些东西 随便写些东西 </h1>
+              </div>  
+            `
+          }
+        }]
+      },
+    ]
+    var router = new VueRouter({
+      routes:routes
+    })
+    var app = new Vue({
+      el:"#app",  
+      router:router,
+      methods:{
+        cl(){
+          setTimeout(function(){
+            this.router.push('/about'); //  跳页
+            alert("访问about页面");
+            setTimeout(function(){
+              this.router.push({name:'user',params:{name:'张三'}});
+              // 首先给当前路由指定一个名称，在后面给传参
+              alert("访问用户页面");
+            },1500);
+          },1500);
+        }
+      }
+    });
+
+    // 配置项： router
+    // 传参：$route.params.
+    //       $route.query.
+    // 组件：routes
+    // 
+    // 在父级路由里追加子路由的两种方式
+    // <router-link :to="'/user/'+$route.params.name+'/more'">更多信息</router-link>  第一种方式
+    // <router-link to="more" append>更多信息</router-link>  第二种方式
+    
+  </script>
+
+</body>
+</html>

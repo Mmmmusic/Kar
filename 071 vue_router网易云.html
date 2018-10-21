@@ -46,11 +46,12 @@
 </head>
 <body>
 
+<input type="number">
   <div id="app">
 
     <div class="wrapper">
       <div class="title">
-        <h2>123</h2>
+        <h2>{{ifyName}}</h2>
       </div>
       <ul class="list clearfix">
         <li v-for="item in classify" @click="cl(item)">{{item.title}}</li>
@@ -89,7 +90,7 @@
           // console.log(JSON.parse(res),"获取成功",this.singerList);
         });
       },
-      beforeUpdate(){
+      mounted(){
         this.$ajax("http://musicapi.leanapp.cn/artist/list?cat="+this.$route.params.ifyId).then((res)=>{
           this.singerList = JSON.parse(res).artists;
           // console.log(JSON.parse(res),"获取成功",this.singerList);
@@ -163,12 +164,14 @@
     var app = new Vue({
       el:"#app",
       data:{
-        classify:[{id:5501,title:"入驻歌手"},{id:1001,title:"华语男歌手"},{id:1002,title:"华语女歌手"},{id:1003,title:"华语组合/乐队"},{id:2001,title:"欧美男歌手"},{id:2002,title:"欧美女歌手"},{id:2003,title:"欧美组合/乐队"},{id:6001,title:"日本男歌手"}],
+        classify:[{id:1001,title:"华语男歌手"},{id:1002,title:"华语女歌手"},{id:1003,title:"华语组合/乐队"},{id:2001,title:"欧美男歌手"},{id:2002,title:"欧美女歌手"},{id:2003,title:"欧美组合/乐队"},{id:6001,title:"日本男歌手"}],
         ifyId:0,
+        ifyName:"",
       },
       methods:{
         cl(item){
           this.ifyId = item.id;
+          this.ifyName = item.title;
           this.$router.replace("/"+this.ifyId);
         }
       },

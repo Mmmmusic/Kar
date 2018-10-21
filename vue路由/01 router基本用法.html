@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+</head>
+<body>
+  
+  <div id="app">
+
+    <div>
+      <router-link to="/">首页</router-link>
+      <router-link to="/about">关于我们</router-link>
+    </div>
+    <div>
+      <router-view></router-view>
+    </div>
+  </div>
+
+  <script>
+
+    var routes = [
+      {
+        path:'/',
+        component:{
+          template:`
+            <div>
+              <h1>首页</h1>
+            </div>  
+          `
+        }
+      },
+      {
+        path:'/about',
+        component:{
+          template:`
+            <div>
+              <h1>关于我们</h1>
+            </div>  
+          `
+        }
+      },
+    ]
+    var router = new VueRouter({
+      routes:routes
+    })
+    var app = new Vue({
+      el:"#app",
+      router:router
+    });
+
+  </script>
+
+</body>
+</html>

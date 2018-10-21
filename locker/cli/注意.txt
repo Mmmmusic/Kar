@@ -1,0 +1,2 @@
+export defalut {} // 将{}导出
+import name from xxx.* // 从模块xxx里导入对应的{} 对象名为name
