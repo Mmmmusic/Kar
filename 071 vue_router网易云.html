@@ -29,11 +29,16 @@
       text-align: center;
     }
     .list{
-      padding: 10px;
+      padding: 10px 0;
+      overflow: hidden;
     }
     .list li{
       float: left;
-      width: 180px;
+      text-align: center;
+      background-color: #dfdfdf;
+      margin: 4px 6px 4px 0;
+      padding: 10px 15px;
+      cursor: pointer;
     }
     .clearfix:after{
       content: "";
@@ -42,20 +47,20 @@
       visibility: hidden;
       clear: both;
     }
+    .singer-name{
+      text-align: center;
+    }
+    .con{
+      padding: 0 10px;
+    }
+
   </style>
 </head>
 <body>
 
-<input type="number">
   <div id="app">
 
     <div class="wrapper">
-      <div class="title">
-        <h2>{{ifyName}}</h2>
-      </div>
-      <ul class="list clearfix">
-        <li v-for="item in classify" @click="cl(item)">{{item.title}}</li>
-      </ul>
       <!-- <router-link to="/">singer</router-link> -->
       <!-- <router-link to="/songs">songs</router-link> -->
       <router-view></router-view>
@@ -68,9 +73,12 @@
     // 歌手页
     var singer = {
       template:`
-        <div>
-          <h1>singer</h1>
-          <ul>
+        <div class="con">
+          <h1 class="singer-name">{{ifyName}}</h1>
+          <ul class="list clearfix">
+            <li v-for="item in classify" @click="cl(item)">{{item.title}}</li>
+          </ul>
+          <ul class="song-list">
             <li v-for="item in singerList">
               <img :src="item.picUrl" alt="">
               <span>{{item.name}}</span>
@@ -81,20 +89,29 @@
       `,
       data(){
         return{
-          singerList:[]
+          singerList:[],
+          classify:[{id:1001,title:"华语男歌手"},{id:1002,title:"华语女歌手"},{id:1003,title:"华语组合/乐队"},{id:2001,title:"欧美男歌手"},{id:2002,title:"欧美女歌手"},{id:2003,title:"欧美组合/乐队"},{id:6001,title:"日本男歌手"}],
+          ifyName:"华语男歌手",
         }
       },
       created(){
         this.$ajax("http://musicapi.leanapp.cn/artist/list?cat=1001").then((res)=>{
           this.singerList = JSON.parse(res).artists;
-          // console.log(JSON.parse(res),"获取成功",this.singerList);
+          console.log(JSON.parse(res),"获取成功",this.singerList);
         });
       },
       mounted(){
-        this.$ajax("http://musicapi.leanapp.cn/artist/list?cat="+this.$route.params.ifyId).then((res)=>{
+        console.log(this.classify);
+      },
+      methods:{
+        cl(item){
+          this.$ajax("http://musicapi.leanapp.cn/artist/list?cat="+item.id).then((res)=>{
           this.singerList = JSON.parse(res).artists;
-          // console.log(JSON.parse(res),"获取成功",this.singerList);
-        });
+          console.log(JSON.parse(res),"获取成功",this.singerList);
+          });
+          this.ifyName = item.title;
+          console.log(this.ifyName);
+        }
       }
     }
     
@@ -163,21 +180,9 @@
     // 根实例
     var app = new Vue({
       el:"#app",
-      data:{
-        classify:[{id:1001,title:"华语男歌手"},{id:1002,title:"华语女歌手"},{id:1003,title:"华语组合/乐队"},{id:2001,title:"欧美男歌手"},{id:2002,title:"欧美女歌手"},{id:2003,title:"欧美组合/乐队"},{id:6001,title:"日本男歌手"}],
-        ifyId:0,
-        ifyName:"",
-      },
-      methods:{
-        cl(item){
-          this.ifyId = item.id;
-          this.ifyName = item.title;
-          this.$router.replace("/"+this.ifyId);
-        }
-      },
       router:new VueRouter({
         routes:[{
-          path:"/:ifyId",
+          path:"/",
           component:singer
         },{
           path:"/songs",

@@ -1,0 +1,8 @@
+export default{}	暴露对象
+
+import 组件名 from "路径"	引入配置对象
+
+在引入配置对象的组件中,局部注册
+components:{
+    c1
+}

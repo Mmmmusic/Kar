@@ -26,18 +26,21 @@
       data:{
         msg:"hi",
       },
+      // 挂载
       beforeCreate(){
         console.log(this.msg,"beforeCreate");
       },
       created(){
         console.log(this.msg,"created");
       },
+      // 挂载
       beforMount(){
         console.log(this.$el.innerHTML,"beforMount");
       },
       mounted(){
         console.log(this.$el.innerHTML,"mounted");
       },
+      // 更新
       beforeUpdate(){
         console.log(this.msg,"beforeUpdate");
         console.log(this.$el.innerHTML,"beforeUpdate");
@@ -45,8 +48,12 @@
       updated(){
         console.log(this.$el.innerHTML,"updated");
       },
+      // 销毁
       beforeDestory(){
         console.log(this.msg,"beforeDestory");        
+      },
+      destoryed(){
+        console.log(this.msg,"destoryed");        
       }
     });
     

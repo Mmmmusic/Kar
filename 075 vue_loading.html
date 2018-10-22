@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <script src="js/vue-router.js"></script>
+</head>
+<body>
+
+
+  <div id="app">
+    <button @click="$load.show('正在加载...')">show</button>
+    <button @click="$load.hide()">hide</button>
+  </div>
+
+</body>
+
+<script>
+
+  function load(){
+    // 找一个空挂载点
+    var v = new Vue({
+      data:{
+        msg:"正在加载...",
+        flag:false
+      },
+      template:`
+        <div v-show="flag">
+          <h1>{{msg}}</h1>
+        </div>
+      `,
+    });
+
+    var node = document.createElement('div');
+    node.id = "load",
+    document.body.appendChild(node);
+
+    v.$mount("#load");
+    
+    return{
+      show(msg){
+        v.flag = true;
+        v.msg = msg;
+      },
+      hide(){
+        v.flag = false;
+      }
+    }
+  }
+
+  // 在vue原型对象上定义方法
+  Vue.prototype.$load = load();
+
+  var obj = load();
+  
+  var app = new Vue({
+    el: "#app",
+    
+  });
+
+</script>
+
+</html>

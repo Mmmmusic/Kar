@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,55 +7,63 @@
   <title>Document</title>
   <script src="js/vue.js"></script>
   <script src="js/vue-router.js"></script>
+  <style>
+  
+    a{
+      text-decoration: none;
+    }
+  
+  </style>
 </head>
 <body>
+
 
   <div id="app">
 
     <router-link to="/">index</router-link>
-    <router-link to="/list/123">list</router-link>
-    <router-view></router-view>
-    
+    <router-link to="/detail/传参abc">detail</router-link>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+
   </div>
 
 </body>
 
 <script>
 
+  // 在router-link 上拼接传的值 
+  // 在组件里添加 props["name"],
+  // 在routes里的组件配置项里添加 props:true
+  // 在组件里引用 {{name}}
+  
   var index = {
     template:`
-    <div>
-      <h3>index</h3>
-    </div>
+      <h1>我是index组件</h1>
     `
   }
-  var list = {
-    props:["id"],
+  var detail = {
+    // 接收值
+    props:["name"],
     template:`
-    <div>
-      <h3>list</h3>
-      <h1>{{id}}</h1>
-    </div>
+      <h1>我是detail组件{{name}}</h1>
     `
   }
+  
   var app = new Vue({
     el: "#app",
-    data:{
-      msg:""
-    },
     router:new VueRouter({
       routes:[{
         path:"/",
         component:index
       },{
-        path:"/list/:id",
-        component:list,
-        props:true
+        path:"/detail/:name",
+        component:detail,
+        props:true, // 写为真
       }]
     })
   });
 
-  
 </script>
 
 </html>
