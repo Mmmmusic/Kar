@@ -27,20 +27,5 @@
     }
 </script>
 <style>
-    .toTop{
-        width:50px;
-        height:50px;
-        background:#a00303;
-        color:white;
-        position:fixed;
-        bottom:20px;
-        right:20px;
-        font-size:12px;
-        text-align:center;
-        line-height:15px;
-        cursor:pointer
-    }
-    .toTop p{
-        margin-top:10px;
-    }
+    
 </style>

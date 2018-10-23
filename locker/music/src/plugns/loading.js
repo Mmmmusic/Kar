@@ -7,13 +7,14 @@ export default{
         flag:false
       },
       template:`
-        <div v-show="flag" style="position:fixed;width:100vw;left:0;top:0;height:100vh;line-height:100vh;text-align:center;background:rgba(0,0,0,0.5)">
+        <div v-show="flag" style="position:fixed;width:100vw;left:0;top:0;height:100vh;line-height:100vh;text-align:center;background:rgba(0,0,0,0.5);color:#ccccc6;">
           {{msg}}
         </div>
       `
     });
     
     var node=document.createElement("div");
+    node.id = "loading";
     document.body.appendChild(node);
     app.$mount(node);
 

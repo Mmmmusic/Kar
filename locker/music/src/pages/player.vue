@@ -25,12 +25,13 @@ export default{
       url:"",
       imgUrl:"",
       x:0,
-      timer:null
+      timer:null,
+      flag:true,
     }
   },
   // props:["imgUrl"],
   created(){
-
+    this.$loading.show("歌曲正在加载...");
     this.$ajax("http://musicapi.leanapp.cn/song/detail?ids="+this.$route.params.id).then((res)=>{
       this.imgUrl = JSON.parse(res).songs[0].al.picUrl;
     console.log(this.imgUrl)
@@ -38,7 +39,6 @@ export default{
 
     // 请求歌曲
     this.$emit("update:title","歌曲名："+this.$route.params.name);
-    this.$loading.show("歌曲正在加载...");
     this.$ajax("http://musicapi.leanapp.cn/music/url?id="+this.$route.params.id).then((res)=>{
     this.url=JSON.parse(res).data[0].url;
     this.$loading.hide();
@@ -47,17 +47,20 @@ export default{
 
   },
   methods:{
-    play(){
-      console.log("play");
+    play(e){
+      console.log(e.target.paused);
       clearInterval(this.timer);
       this.timer = setInterval(()=>{
         this.x+=0.2;
-        console.log(this.x);
-      },16.7)
+        if(this.x > 360){
+          this.x = 0;
+        }
+        // console.log(this.x);
+      },16.7);
     },
-    pause(){
+    pause(e){
       clearInterval(this.timer);
-      console.log("pause");
+      console.log(e.target.paused);
     }
   }
 }

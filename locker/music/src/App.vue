@@ -5,9 +5,7 @@
     </div>
     <!-- <router-view :title.sync="title" :imgUrl.sync="imgUrl"></router-view> -->
     <!-- <router-view :title.sync="title" @cha="imgUrl=arguments[0]" :imgUrl="imgUrl"></router-view> -->
-    <keep-alive>
-      <router-view :title.sync="title"></router-view>
-    </keep-alive>
+    <router-view :title.sync="title"></router-view>
   </div>
 </template>
 

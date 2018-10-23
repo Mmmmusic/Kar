@@ -1,5 +1,6 @@
 <template>
   <div>
+    <singerList></singerList>
     <ul class="list">
       <li v-for="item in songList" @click="cl(item)">
         <img :src="item.al.picUrl" alt="">
