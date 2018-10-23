@@ -1,0 +1,24 @@
+export default{}	暴露对象
+
+import 组件名 from "路径"	引入配置对象
+
+在引入配置对象的组件中,局部注册
+components:{
+    c1
+}
+
+如果要引入 scss 文件的话
+
+要先安装
+
+	cnpm i node-sass --save-dev	编译sass语法
+
+	cnpm i sass-loader --save-dev	匹配sass文件
+
+cli 是基于 nodejs 环境
+
+引入css的三种方式
+
+	01 improt "./style.css"
+	02 在style标签上加 lang="scss" 属性
+	03 在css内部 @import "./style.css"
