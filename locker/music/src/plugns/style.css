@@ -1,0 +1,109 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2018-10-23 16:40:36
+ * @version $Id$
+ */
+
+*{
+  margin: 0;
+  padding: 0;
+}
+.wrapper,#head,.headBox,.list{
+  min-width: 375px;
+}
+#head{
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  position: fixed;
+  background-color: #a00303;
+  z-index: 999;
+}
+.headBox{
+  position: relative;
+  height: 50px;
+}
+#back{
+  position: absolute;
+  left: 30px;
+  cursor: pointer;
+}
+li{
+  list-style: none;
+}
+.list li{
+  height: 90px;
+  line-height: 90px;
+  background-color: #f6f6f6;
+  margin-top: 2px;
+  cursor: pointer;
+}
+.list span{
+  display: inline-block;
+  padding-left: 30px;
+}
+.list img{
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 5px;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #666;
+  margin: -6px 0 0 5px;
+}
+.imgBox{
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+.imgBox img{
+  width: 100%;
+  filter: blur(50px);
+}
+audio{
+  position: absolute;
+  width: 90%;
+  left: 50%;
+  right: 50%;
+  bottom: 20px;
+  transform:translateX(-50%);
+  z-index: 2;
+  opacity: .7;
+  cursor: pointer;
+}
+.lyricBox{
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 30%;
+  left: 50%;
+  z-index: 2;
+  transform:translate(-50%,-30%);
+}
+.rot{
+  margin: 0 auto;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.rot img{
+  width: 100%;
+}
+.lyric{
+  margin: 0 auto;
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: #fff;
+  opacity: .8;
+}

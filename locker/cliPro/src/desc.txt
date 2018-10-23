@@ -1,0 +1,24 @@
+1. 指定组件作为根实例模板，结构看上去会清晰一些
+
+2. 局部组件的注册需要在需要引入该组件的文件下:
+	01 import 组件名 from "组件路径"
+	02 components:{
+		组件名,		// 局部注册该组件
+	}
+
+3. 路由分离成单个js文件
+
+4. css引入
+	import "./名字.css"
+
+5. js引入
+	import router from "./router.js"
+
+6. sass编译
+	import "./名字.scss"
+
+7. sass编译需下载
+
+	cnpm i node-sass --save-dev	编译sass语法
+
+	cnpm i sass-loader --save-dev	匹配sass文件

@@ -1,0 +1,71 @@
+<template>
+  <div>
+    
+    <audio controls :src="url" @play="play" @pause="pause"></audio>
+    <div class="imgBox">
+      <img :src="imgUrl" alt="">
+    </div>
+
+    <div class="lyricBox">
+      <div class="rot" :style="{transform:'rotate('+x+'deg)'}">
+        <img :src="imgUrl" alt="">
+      </div>
+      <div class="lyric">暂无歌词</div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+
+export default{
+
+  data(){
+    return{
+      url:"",
+      imgUrl:"",
+      x:0,
+      timer:null
+    }
+  },
+  // props:["imgUrl"],
+  created(){
+
+    this.$ajax("http://musicapi.leanapp.cn/song/detail?ids="+this.$route.params.id).then((res)=>{
+      this.imgUrl = JSON.parse(res).songs[0].al.picUrl;
+    console.log(this.imgUrl)
+    });
+
+    // 请求歌曲
+    this.$emit("update:title","歌曲名："+this.$route.params.name);
+    this.$loading.show("歌曲正在加载...");
+    this.$ajax("http://musicapi.leanapp.cn/music/url?id="+this.$route.params.id).then((res)=>{
+    this.url=JSON.parse(res).data[0].url;
+    this.$loading.hide();
+    // console.log(this.imgUrl)
+    });
+
+  },
+  methods:{
+    play(){
+      console.log("play");
+      clearInterval(this.timer);
+      this.timer = setInterval(()=>{
+        this.x+=0.2;
+        console.log(this.x);
+      },16.7)
+    },
+    pause(){
+      clearInterval(this.timer);
+      console.log("pause");
+    }
+  }
+}
+
+</script>
+
+<style>
+  
+  
+
+</style>
