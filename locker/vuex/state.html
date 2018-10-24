@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vuex.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{num}}</h1>
+    </div>
+</body>
+<script>
+    console.log(Vuex)
+    var app=new Vue({
+        el:"#app",
+        data:{
+
+        },
+        // computed:{
+        //     num(){
+        //         return this.$store.state.num;
+        //     }
+        // },
+        //使用辅助函数_对象方式
+        // computed:{
+        //     ...Vuex.mapState({
+        //         n: "num"
+        //         // n:state=>state.num,
+        //         // n(state){
+        //         //     return state.num;
+        //         // }
+        //     })
+        // },
+        //数组方式
+        computed:{
+            ...Vuex.mapState(["num"])
+        },
+
+        store:new Vuex.Store({
+            state:{
+                num:1,
+                count:100
+            }
+        })
+    })
+</script>
+</html>

@@ -7,7 +7,8 @@
     export default{
         data(){
             return{
-                flag:false
+                flag:false,
+                st:null
             }
         },
         created(){
@@ -20,27 +21,13 @@
         },
         methods:{
             toTop(){
-                document.body.scrollTop=0
-                document.documentElement.scrollTop=0
+                this.st=document.body.scrollTop||document.documentElement.scrollTop;
+                this.st&&window.scrollBy(0,-this.st/9.8);
+                this.st&&requestAnimationFrame(this.toTop);
             }
         }
     }
 </script>
 <style>
-    .toTop{
-        width:50px;
-        height:50px;
-        background:#a00303;
-        color:white;
-        position:fixed;
-        bottom:20px;
-        right:20px;
-        font-size:12px;
-        text-align:center;
-        line-height:15px;
-        cursor:pointer
-    }
-    .toTop p{
-        margin-top:10px;
-    }
+    
 </style>

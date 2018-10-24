@@ -1,0 +1,9 @@
+在config文件夹下的index.js中的dev里添加
+ 
+proxyTable: {
+      '/': {
+        // 测试环境
+        target: 'http://localhost:8000',  // 接口域名
+        changeOrigin: true  //是否跨域
+      }
+    },

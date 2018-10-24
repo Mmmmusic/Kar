@@ -13,6 +13,10 @@ Vue.use(ajax);
 import toTop from "./components/toTop";
 Vue.component("toTop",toTop);
 
+// 注册歌手列表为全局组件
+import singerList from "./components/singerList";
+Vue.component("singerList",singerList);
+
 // 引用全局css样式
 import "./plugns/style.css";
 

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vuex.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{$store.state.num}}</h1>
+        <c1></c1>
+        <c2></c2>
+        <button @click="add">add</button>
+    </div>
+</body>
+<script>
+    Vue.component("c1",{
+        template:`
+            <h2>{{$store.state.num}}</h2>
+        `
+    })
+    Vue.component("c2", {
+            template: `
+            <h3>{{$store.state.num}}</h3>
+        `
+    })
+    var app=new Vue({
+        el:"#app",
+        data:{
+
+        },
+        //生成store实例对象，最终会挂载在每个Vue实例对象上，能够通过this.$store访问到store实例对象
+        //访问state :  this.$store.state.num
+        //修改状态: this.$store.commit("mutations内部方法")
+        store:new Vuex.Store({
+            state:{
+                num:1
+            },
+            mutations:{
+                //方法内部this不指向当前store实例，但是提供了state形参用于访问state状态
+                add(state){
+                    state.num++;
+                }
+            }
+        }),
+        methods:{
+            add(){
+                this.$store.commit("add");
+            }
+        }
+    })
+</script>
+</html>

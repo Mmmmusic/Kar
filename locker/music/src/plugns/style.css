@@ -21,7 +21,7 @@
   color: #fff;
   font-weight: bold;
   position: fixed;
-  background-color: #a00303;
+  background-color: #c20c0c;
   z-index: 999;
 }
 .headBox{
@@ -30,18 +30,47 @@
 }
 #back{
   position: absolute;
-  left: 30px;
+  left: 0;
   cursor: pointer;
+  padding: 0 30px;
+}
+#back:hover{
+  background-color: rgba(51,12,12,.2);
 }
 li{
   list-style: none;
 }
+.singer{
+  display: flex;
+  justify-content:space-between;
+  overflow: hidden;
+  min-width: 900px;
+  border: 1px #ccccc6 solid;
+  padding: 6px 12px;
+}
+.singer li{
+  padding: 20px;
+  cursor: pointer;
+  transition: all .4s;
+  border-radius: 4px;
+  min-width: 120px;
+  text-align: center;
+}
+.singer li:hover{
+  background-color: #121212;
+  color: #ccccc6;
+}
 .list li{
   height: 90px;
   line-height: 90px;
-  background-color: #f6f6f6;
-  margin-top: 2px;
+  background-color: #121212;
+  border-bottom: 1px #191712 solid;
   cursor: pointer;
+  color: #ccccc6;
+  padding: 4px 12px;
+}
+.list li:hover{
+  color: #fff;
 }
 .list span{
   display: inline-block;
@@ -55,7 +84,7 @@ li{
   display: inline-block;
   vertical-align: middle;
   background-color: #666;
-  margin: -6px 0 0 5px;
+  margin: -2px 0 0 5px;
 }
 .imgBox{
   position: absolute;
@@ -95,6 +124,7 @@ audio{
   height: 350px;
   border-radius: 50%;
   overflow: hidden;
+  cursor: pointer;
 }
 .rot img{
   width: 100%;
@@ -106,4 +136,36 @@ audio{
   text-align: center;
   color: #fff;
   opacity: .8;
+}
+.toTop{
+  width:50px;
+  height:50px;
+  background:#c20c0c;
+  color:white;
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  font-size:12px;
+  text-align:center;
+  line-height:15px;
+  cursor:pointer
+}
+.toTop p{
+  margin-top:10px;
+}
+@media (max-width: 1068px){
+  .singer{
+    min-width: 768px;
+  }
+  .singer li{
+    padding: 15px;
+  }
+}
+@media (max-width: 768px){
+  .singer{
+    min-width: 768px;
+  }
+  .singer li{
+    padding: 12px;
+  }
 }

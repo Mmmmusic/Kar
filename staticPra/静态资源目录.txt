@@ -1,0 +1,10 @@
+cnpm i express --save-dev
+
+指定文件夹
+	static
+
+app.js 配置
+
+执行node命令
+
+	node app

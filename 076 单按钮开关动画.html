@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+    
+    .box{
+      width: 100px;
+      height: 100px;
+      background-color: #e0244d;
+      cursor: pointer;
+      margin: 20px;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <div id="app">
+    <div class="box" @click="cl" :style="{transform:'rotate('+x+'deg)'}"></div>
+  </div>
+
+  <script>
+  
+    var app = new Vue({
+      el:"#app",
+      data:{
+        x:0,
+        timer:null,
+        count:0
+      },
+      methods:{
+        cl(){
+          this.count++;
+          if(this.count%2){
+            this.timer = setInterval(()=>{
+              this.x++;
+            },16.7)
+          }else{
+            clearInterval(this.timer);
+          }
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>
