@@ -126,7 +126,7 @@
     Vue.component("slide",{
       template:`
       
-        <div class="view">
+        <div class="view" @mouseover="ani" @mouseout="againAni">
 
           <div class="banner" :style="{width:625*imgUrl.length+'px',marginLeft:-625*num+'px',transition:transition}" @transitionend="nextEnd">
             <div class="bannerlist" v-for="x in imgUrl"><img :src="x" alt=""></div>
@@ -147,9 +147,23 @@
           imgUrl:["img/6.jpg","img/1.png","img/2.jpg","img/3.jpg","img/4.jpg","img/5.jpg","img/6.jpg","img/1.png"],
           transition:"all .6s",
           flag:true,
-          animate:true,
-          x:0
+          x:0,
+          timer:null
         }
+      },
+      created(){
+        this.timer=setInterval(()=>{
+          if(this.num == this.imgUrl.length - 2){
+            this.transition = "all 0s";
+            this.x = -1;
+          }
+          if(this.flag){
+            this.flag = false;
+            this.transition = "all .6s";
+            this.num++;
+            this.x++;
+          }
+        },1500);
       },
       methods:{
         next(){
@@ -196,6 +210,24 @@
             this.x = index;
             // console.log(index);
           }
+        },
+        ani(){
+          clearInterval(this.timer);
+        },
+        againAni(){
+          clearInterval(this.timer);
+          this.timer=setInterval(()=>{
+            if(this.num == this.imgUrl.length - 2){
+              this.transition = "all 0s";
+              this.x = -1;
+            }
+            if(this.flag){
+              this.flag = false;
+              this.transition = "all .6s";
+              this.num++;
+              this.x++;
+            }
+          },1500);
         }
       },
 
