@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <script src="js/vuex.min.js"></script>
+</head>
+<body>
+
+  <div id="app">
+
+    <c1></c1>
+
+  </div>
+  
+  <script>
+
+    Vue.component("c1",{
+      template:`
+        <div>
+          <h3 @click="cl">{{$store.state.price}}</h3>
+        </div>
+      `,
+      methods:{
+        cl(){
+          // 第一个参数是事件名，第二个参数是值
+          // this.$store.commit("add",{a:10,b:20});
+          // 另一种写法
+          this.$store.commit({
+            type:"add",
+            a:10,
+            b:20
+          });
+        }
+      }
+    });
+
+    var app = new Vue({
+      el:"#app",
+      store:new Vuex.Store({
+        
+      })
+
+    })
+
+  </script>
+
+</body>
+</html>

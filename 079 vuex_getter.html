@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <script src="js/vuex.min.js"></script>
+</head>
+<body>
+
+  <div id="app">
+
+    <h1>{{num}}</h1>
+    <c1></c1>
+
+  </div>
+  
+  <script>
+
+    Vue.component("c1",{
+      template:`
+        <div>
+          <h3>{{$price}}</h3>
+        </div>
+      `,
+      computed:{
+        $price(){
+          return this.$store.getters.$price;
+        }
+      }
+    });
+
+    var app = new Vue({
+      el:"#app",      
+      computed:{
+        ...Vuex.mapState({
+          num:state=>{return state.num}
+        }),
+      },
+      store:new Vuex.Store({
+        state:{
+          price:10,
+          num:3
+        },
+        // getters 类似于 计算属性
+        getters:{
+          $price(state,getters){
+            return "$" + state.price
+          },
+        }
+      }),
+
+    })
+
+  </script>
+
+</body>
+</html>

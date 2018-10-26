@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <script src="js/vuex.min.js"></script>
+</head>
+<body>
+
+  <div id="app">
+
+    <c1></c1>
+
+  </div>
+  
+  <script>
+
+    Vue.component("c1",{
+      template:`
+        <div>
+          <h3>{{$store.getters.fn(6)}}</h3>
+        </div>
+      `,
+    });
+
+    var app = new Vue({
+      el:"#app",
+      store:new Vuex.Store({
+        state:{
+          price:10
+        },
+        // getters 类似于 计算属性
+        getters:{
+          fn(state){
+            // 返回一个函数，类似于闭包
+            return function(a){
+              return a>state.price;
+            }
+          }
+        }
+      }),
+
+    })
+
+  </script>
+
+</body>
+</html>
