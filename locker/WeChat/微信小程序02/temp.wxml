@@ -1,0 +1,4 @@
+<template name="v">
+  <view>{{msg}}</view>
+  <button>按钮</button>
+</template>

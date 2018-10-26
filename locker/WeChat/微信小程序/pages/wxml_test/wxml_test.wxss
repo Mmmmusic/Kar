@@ -1,0 +1,10 @@
+.box{
+  width:100%;
+  height:200px;
+  background: red;
+  line-height: 200px
+}
+.scrollView{
+  height:200px;
+  border:1px solid red
+}

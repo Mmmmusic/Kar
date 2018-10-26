@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+  
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  html,body{
+    height: 100%;
+    background-color: #e0e0e0;
+  }
+  .view{
+    width: 100%;
+    min-width: 7.5rem;
+    position: relative;
+  }
+  .box{
+    width: 100%;
+    min-width: 7.5rem;
+    height: 5rem;
+    background-color: yellow;
+  }
+  .view .list{
+    width: 100%;
+    min-width: 7.5rem;
+    height: 4rem;
+    background-color: #dfdfdf;
+  }
+  .list .list-info{
+    position: absolute;
+    top: 4rem;
+    left: 50%;
+    width: 6.6rem;
+    height: 4rem;
+    background-color: #fff;
+    transform:translateX(-50%);
+    border-radius: 0.04rem;
+  }
+  .l-info{
+    height: 2rem;
+    display: flex;
+  }
+  .l-info p{
+    width: 1.65rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-size: 0.3rem
+  }
+  .l-info p:hover{
+    background-color: #333439;
+    color: #fff;
+  }
+
+</style>
+</head>
+<body>
+  
+  <div class="view">
+    <div class="box"></div>
+    <div class="list">
+      <div class="list-info">
+        <div class="l-info">
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+          <p>4</p>
+        </div>
+        <div class="l-info">
+          <p>5</p>
+          <p>6</p>
+          <p>7</p>
+          <p>8</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <script>
+
+    ;(function(){
+
+      function setFontSize(){
+
+        // 获取浏览器窗口宽度
+        var w = window.innerWidth;
+
+        // 屏幕适配换算
+        document.documentElement.style.fontSize = w/750*100 + 'px';
+
+      }
+
+      // 默认执行
+      setFontSize();
+
+      var timer = null;
+      // 二级绑定防止 window事件 冲突
+      window.addEventListener("resize",function(){
+
+        clearTimeout(timer);
+        // 防止多余运算
+        timer = setTimeout(function(){
+          setFontSize();
+        },20);
+
+      });
+
+    })();
+
+  </script>
+
+</body>
+</html>

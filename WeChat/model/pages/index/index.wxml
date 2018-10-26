@@ -1,0 +1,3 @@
+<button bindtap="scan">扫码</button>
+<button bindtap="alert">alert</button>
+<view>{{res}}</view>

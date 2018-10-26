@@ -1,0 +1,7 @@
+<!--pages/player/player.wxml-->
+
+<view class="aud">
+  <audio src="{{src}}" name="{{name}}" author="{{singer}}" controls bindtap="cl"></audio>
+</view>
+<button bindtap="cl">歌曲信息</button>
+

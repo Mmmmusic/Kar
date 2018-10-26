@@ -1,0 +1,21 @@
+<!-- <view class="box">hello</view> -->
+
+<scroll-view scroll-y="{{true}}" scroll-top="{{st}}" bindscroll="scroll" bindscrolltoupper="scrollTop" class='scrollView'>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+    <view>hello</view>
+</scroll-view>
+<button bindtap="toTop">返回顶部</button>
+

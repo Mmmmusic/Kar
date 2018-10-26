@@ -1,0 +1,4 @@
+<camera device-position="back" flash="off" style="width: 100%; height: 300px;"></camera>
+<button bindtap="takePhoto">takePhoto</button>
+<image src="{{src}}"></image>
+<navigator url="/pages/index/index?x=10">index</navigator>

@@ -1,0 +1,11 @@
+<button bindtap="scan">扫码</button>
+<button bindtap="alert">alert</button>
+<view>{{res}}</view>
+
+<!-- 单标签必须有/ -->
+<import src="../../temp.wxml" />
+<template is="v" data="{{ ...{msg:'hello'} }}"></template>
+
+<button bindtap="tap" data-x="{{10}}">触发tap</button>
+
+<view class='box'></view>

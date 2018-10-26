@@ -1,0 +1,36 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#00ff00",
+    "navigationBarTitleText": "黛眉",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "selectedColor": "#e0244d",
+    "borderStyle":"black",
+    "position":"bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "日志"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "信息"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "我的"
+      }
+    ]
+  }
+}

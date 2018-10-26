@@ -1,0 +1,7 @@
+<view>
+  <view wx:for="{{list}}" wx:key="{{item.id}}">
+    <image class="img" src="{{item.picUrl}}"></image>
+    <text>{{item.name}}</text>
+    <navigator url="/pages/songs/songs?id={{item.id}}">查看单曲</navigator>
+  </view>
+</view>

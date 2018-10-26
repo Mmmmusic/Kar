@@ -1,0 +1,3 @@
+<!--pages/player/player.wxml-->
+
+<audio src="{{src}}" name="{{name}}" controls></audio>

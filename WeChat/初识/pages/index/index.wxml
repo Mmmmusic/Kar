@@ -1,0 +1,5 @@
+<view>{{msg}}</view>
+<view class="{{msg}}">123</view>
+
+
+<button bindtap="tap">按钮</button>
